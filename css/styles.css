@@ -1,0 +1,664 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: var(--color-fondo);
+    padding: 2%;
+}
+
+:root {
+  --color-primario: #fff6b0;
+  --color-secundario: #8c5938;
+  --color-texto: #333;
+  --color-texto-secundario: #fffcf0;
+  --color-fondo: #e4a96f;
+  --color-acierto: #4caf50;
+  --color-error: #f01d1d ;
+}
+
+.bangers-regular {
+  font-family: "Bangers", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1, h2, h3{
+    font-family: "Bangers", system-ui;
+    font-weight: 500;
+    font-style: bold;
+    color: var(--color-texto);
+}
+
+h1{
+    font-size: 6rem;
+}
+
+h2{
+    font-size: 3.5rem;
+}
+
+h3{
+    font-size: 2.5rem;
+}
+
+a, p, h4, input, .btn{
+    font-family: "Bangers", system-ui;
+    font-weight: 100;
+    font-style: normal;
+    color: var(--color-texto);
+    font-size: 1.5rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+/*BOTONES*/
+.btn{
+    background-color: var(--color-primario);
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 4px 4px 0 var(--color-fondo);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover{
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--color-fondo);
+}
+
+/*HEADER*/
+/*NAVBAR_LANDING*/
+nav.navbar{
+    padding: 2% 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background:
+        linear-gradient(
+        to right,
+        var(--color-primario) 0%,
+        var(--color-primario) 60%,
+        rgba(228, 169, 111, 0.8) 65%,
+        rgba(228, 169, 111, 0) 70%
+        ),
+        url('../img/assets/arena.png') no-repeat right center;
+    background-size: 100% 100%, cover;
+    background-repeat: no-repeat;
+    background-position: 0 0, right center;
+    border: solid 6px var(--color-secundario);
+    border-radius: 5px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+/*Logo*/
+nav.navbar>a>img{
+    width: 300px;
+    filter: drop-shadow(6px 6px 0 #3a2e2a);
+}
+
+/*Login Sigin*/
+nav.navbar>div.menu{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/*NAVBAR_HOME*/
+nav.navbar_home{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-primario);
+    border: solid 6px var(--color-secundario);
+    border-radius: 5px;
+    padding: 2% 5%;
+    z-index: 99;
+}
+
+nav.navbar_home>div.menu{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*MAIN*/
+main{
+    margin: 5%;
+    background-color: #fff6b0;
+    border: solid 6px var(--color-secundario);
+    border-radius: 5px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+/*Banner*/
+section.banner{
+    background: url('../img/assets/arena.png') no-repeat center center;
+    background-size: cover;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section.banner>div{
+    background-color: rgba(0, 0, 0, 0.39);
+    height: 80%;
+    width: 80%;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    gap: 20px;
+}
+
+section.banner>div>h1, section.banner>div>p{
+    color: var(--color-texto-secundario);
+}
+
+section.banner>div>h1, section.banner>div>a.btn{
+    margin-top: 2%;
+}
+
+/*Apariencias*/
+section.apariencia{
+    width: 80%;
+    margin: 6% auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60vh;
+    gap: 5%;
+}
+
+/*Carrusel*/
+section.apariencia>div.carrusel{
+    position: relative;
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+section.apariencia>div.carrusel>div.imagenes{
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+
+/*Flechas*/
+section.apariencia>div.carrusel>button.siguiente, section.apariencia>div.carrusel>button.anterior{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 2;
+    color: var(--color-texto);
+    transition: all 0.3s ease-in-out;
+}
+
+section.apariencia>div.carrusel>button.siguiente{
+    right: 20px;
+}
+
+section.apariencia>div.carrusel>button.anterior{
+    left: 0px;
+}
+
+section.apariencia>div.carrusel>button.anterior:hover, section.apariencia>div.carrusel>button.siguiente:hover{
+    transform: scale(1.2) translateY(-50%);
+}
+
+/*Imagenes*/
+section.apariencia>div.carrusel>div.imagenes>img{
+    width: 100%;
+    height: 100%
+}
+
+/*Texto*/
+section.apariencia>div.carrusel>div.texto{
+    text-align: center;
+    width: 40%;
+    margin: auto;
+    color: var(--color-texto-secundario);
+}
+
+/*COMBATE*/
+section.combate{
+    width: 80%;
+    margin: 6% auto;
+}
+
+section.combate>h2{
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+section.combate>div{
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+}
+
+section.combate>div>div{
+    width: 100%;
+
+}
+
+section.combate>div>div>h3{
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2%;
+}
+
+section.combate>div>div>div{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    flex-wrap: wrap;
+}
+
+section.combate>div>div>div>div{
+    position: relative;
+}
+
+section.combate>div>div>div>div>div.modal{
+    position: absolute;
+    z-index: 99;
+    background-color: var(--color-primario);
+    border: solid 6px var(--color-secundario);
+    border-radius: 5px;
+    padding: 2%;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+section.combate>div>div>div>div>div.modal>h4{
+    white-space: nowrap;
+}
+
+/*MASCOTAS*/
+section.mascotas{
+    width: 80%;
+    margin: 6% auto;
+}
+
+section.mascotas>h2{
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+section.mascotas>div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2%;
+}
+
+section.mascotas>div>div{
+    width: 100%;
+}
+
+/*FORM*/
+body:has(.form){
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form.form{
+    width: 50%;
+    padding: 2%;
+    background-color: var(--color-primario);
+    border: solid 6px var(--color-secundario);
+    border-radius: 5px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form.form>input, form.form>div{
+    width: 100%;
+    margin: 2% 0;
+}
+
+form.form>input:not([type="submit"]){
+    border: none;
+    padding: 2%;
+    border: solid 6px var(--color-secundario);
+    background-color: transparent;
+    border-radius: 5px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+form.form>input:not([type="submit"]):focus{
+    outline: none;
+}
+
+form.form>input[type="submit"]{
+    border: none;
+}
+
+form.form>div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*CREAR_BRUTO*/
+body:has(section.crear_bruto){
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+section.crear_bruto{
+    width: 80%;
+    margin: 6% auto;
+    display: flex;
+    justify-content: center;
+}
+
+section.crear_bruto>form{
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+div.apariencia>div.carrusel{
+    position: relative;
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+div.apariencia>div.carrusel>div.imagenes{
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+
+/*Flechas*/
+div.apariencia>div.carrusel>button.siguiente, div.apariencia>div.carrusel>button.anterior{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    z-index: 2;
+    color: var(--color-texto);
+    transition: all 0.3s ease-in-out;
+}
+
+div.apariencia>div.carrusel>button.siguiente{
+    right: 20px;
+}
+
+div.apariencia>div.carrusel>button.anterior{
+    left: 0px;
+}
+
+div.apariencia>div.carrusel>button.anterior:hover, div.apariencia>div.carrusel>button.siguiente:hover{
+    transform: scale(1.2) translateY(-50%);
+}
+
+/*Imagenes*/
+div.apariencia>div.carrusel>div.imagenes>img{
+    width: 100%;
+    height: 100%
+}
+
+/*HOME*/
+section.brutos{
+    padding: 2%;
+}
+
+section.brutos>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+}
+
+
+section.brutos>div:has(button){
+    justify-content: start;
+}
+
+section.brutos>div>div{
+    width: 25%;
+    text-align: center;
+    border: solid 6px var(--color-primario);
+    transition: all 0.3s ease-in-out;
+}
+
+section.brutos>div>div:not(:has(button)):hover{
+    border: solid 6px var(--color-secundario);
+    border-radius: 5px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+section.brutos>div>div>img{
+    width: 100%;
+}
+
+section.brutos>div>div>p{
+    font-size: 2rem;
+    margin-top: 2%;
+}
+
+section.brutos>div>div:has(button){
+    margin-left: 5%;
+    width: 60px;
+    height: 60px;
+    padding: 1%;
+    background-color: var(--color-secundario);
+    border: none;
+    border-radius: 100%;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+
+
+section.brutos>div>div>button{ 
+    font-size: 2rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-texto-secundario);
+}
+
+/*INVENTARIO*/
+div.inventario{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2%;
+    padding: 2%;
+}
+
+div.inventario>div.herramientas_habilidades{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.inventario>div.herramientas_habilidades>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2%;
+}
+
+div.inventario>div.combate{
+    width: 30%;
+}
+
+div.inventario>div.personajes{
+    width: 30%;
+}
+
+div.herramientas_habilidades>div.habilidades{
+    margin-bottom: 10%;
+}
+
+div.herramientas_habilidades>div.habilidades>div{
+    position: relative;
+}
+
+div.herramientas_habilidades>div.habilidades>div>div.modal{
+    position: absolute;
+    z-index: 99;
+    background-color: var(--color-primario);
+    border: solid 6px var(--color-secundario);
+    border-radius: 5px;
+    padding: 2%;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+div.herramientas_habilidades>div.habilidades>div>div.modal>h4{
+    white-space: nowrap;
+}
+
+div.herramientas_habilidades>div.habilidades>div>img{
+    cursor: pointer;
+    width: 60px;
+}
+
+
+div.herramientas_habilidades>div.herramientas>div>img.opc{
+    opacity: 0.4;
+}
+
+div.herramientas_habilidades>div.habilidades>div>img.opc{
+    opacity: 0.4;
+}
+
+div.herramientas_habilidades>div.herramientas>div>img{
+    cursor: pointer;
+    width: 80px;
+}
+
+div.herramientas_habilidades>div.herramientas{
+    background: url("../img/assets/tablero.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+
+div.herramientas_habilidades>div.herramientas>div{
+    position: relative;
+}
+
+div.herramientas_habilidades>div.herramientas>div>div.modal{
+    position: absolute;
+    z-index: 99;
+    background-color: var(--color-primario);
+    border: solid 6px var(--color-secundario);
+    border-radius: 5px;
+    padding: 2%;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+div.herramientas_habilidades>div.herramientas>div>div.modal>h4{
+    white-space: nowrap;
+}
+
+div.personajes>div.personaje>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.personajes>div.personaje>div>img{
+    width: 250px;
+    margin-bottom: 4%;
+}
+
+div.personajes>div.animales{
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.personajes>div.animales>img{
+    width: 150px;
+    margin-bottom: 4%;
+}
+
+div.combate{
+    text-align: center;
+}
+
+div.combate>button{
+    border: none;
+    margin-bottom: 2%;
+}
+
+/*BUSCADOR*/
+section.brutos>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+}
+
+/*ARENA*/
+body:has(.fondo){
+    padding: 0;
+    margin: 0;
+}
+main:has(.fondo){
+    padding: 0;
+    margin: 0;
+    border: 0;
+}   
+section.fondo{
+    background: url("../img/assets/arena.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+}
