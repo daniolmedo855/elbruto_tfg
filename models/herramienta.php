@@ -57,38 +57,34 @@
             return $herramientas;
         }
 
-        public function get_efectos_herramientas_id($id) {
-            $sql = "SELECT herramienta.id_herramienta, efecto.nombre, multiplicador 
-            FROM efecto 
-            JOIN efecto_herramienta ON efecto.id_efecto = efecto_herramienta.id_efecto 
-            JOIN herramienta ON herramienta.id_herramienta = efecto_herramienta.id_herramienta 
-            WHERE herramienta.id_herramienta = ?;";
-    
+        public function get_herramientas_efecto_id($id) {
+            $sql = "select herramienta.id_herramienta, herramienta.nombre, herramienta.danio, herramienta.imagen from bruto_herramienta join herramienta on herramienta.id_herramienta = bruto_herramienta.id_herramienta where bruto_herramienta.id_bruto = ?";
             $sentencia = $this->bd->prepare($sql);
-            if (!$sentencia) {
-                return [];
-            }
-
-            if (!$sentencia->bind_param("i", $id)) {
-                $sentencia->close();
-                return [];
-            }
-
-            if (!$sentencia->execute()) {
-                $sentencia->close();
-                return [];
-            }
-
+            $sentencia->bind_param("i", $id);
+            $sentencia->execute();
             $resultado = $sentencia->get_result();
-            if (!$resultado) {
-                $sentencia->close();
-                return []; 
-            }
-
             $herramientas = $resultado->fetch_all(MYSQLI_ASSOC);
+
             $sentencia->close();
 
-            return $herramientas ?: [];
+            return $herramientas;
+        }
+
+        public function herramienta_random($id_bruto){
+            $sql = "select id_herramienta from herramienta where id_herramienta not in (select id_herramienta from bruto_herramienta where id_bruto = ?) order by rand() limit 1;";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $id_bruto);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $herramienta = $resultado->fetch_all(MYSQLI_ASSOC);
+            $sentencia->close();
+
+            $sql = "insert into bruto_herramienta (id_bruto, id_herramienta) values (?, ?);";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("ii", $id_bruto, $herramienta[0]["id_herramienta"]);
+            $sentencia->execute();
+
+            return ["success" => true, "herramienta" => $herramienta[0]["id_herramienta"]];
         }
     }
 ?>

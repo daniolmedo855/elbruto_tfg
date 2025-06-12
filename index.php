@@ -1,12 +1,11 @@
 <?php
-    
-
     if (isset($_REQUEST["action"])) {
         $accion = strtolower(trim($_REQUEST["action"]));
-        $acciones_permitidas = ["login", "register", "home" , "logout" , "crear_bruto", "inventario", "buscador", "arena"];
+        $acciones_permitidas = ["login", "register", "home" , "logout" , "crear_bruto", "inventario", "buscador", "arena", "ranking", "admin"];
         if (in_array($accion, $acciones_permitidas)) {
             $accion();
         }
+
     } else {
         sesion();
         if(isset($_SESSION["usuario"])){
@@ -67,6 +66,18 @@
     function arena(){
         sesion();
         $contenido = "views/arena.php";
+        require_once "views/plantilla.php";
+    }
+
+    function ranking(){
+        sesion();
+        $contenido = "views/ranking.php";
+        require_once "views/plantilla.php";
+    }
+
+    function admin(){
+        sesion();
+        $contenido = "admin.php";
         require_once "views/plantilla.php";
     }
 

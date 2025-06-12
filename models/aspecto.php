@@ -10,5 +10,15 @@
             $this->id_aspecto = $id_aspecto;
             $this->imagen = $imagen;
         }
+
+        public function get_aspectos(){
+            $sql = "select * from aspecto";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $aspectos = $resultado->fetch_all(MYSQLI_ASSOC);
+            $sentencia->close();
+            return $aspectos;
+        }
     }
 ?>

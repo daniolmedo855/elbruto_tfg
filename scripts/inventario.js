@@ -8,7 +8,6 @@ const divCombate= document.querySelector(".combate");
 //FUNCIONES
 function mostrar_habilidades() {
     get_habilidades().then(habilidades => {
-
         get_habilidades_bruto().then(habilidades_bruto => {
             habilidades.forEach(habilidad => {
                 const divHabilidad = document.createElement("div");
@@ -26,6 +25,11 @@ function mostrar_habilidades() {
                     const titulo = document.createElement("h4");
                     titulo.textContent = habilidad.nombre;
                     modal.append(titulo);
+                    habilidad.efectos.forEach(efecto => {
+                        const p = document.createElement("p");
+                        p.textContent = efecto.nombre+": +" + Math.round((efecto.multiplicador-1 )* 100) + "%";
+                        modal.append(p);
+                    })
                     divHabilidad.append(modal);
                 })
 
@@ -59,6 +63,19 @@ function mostrar_herramientas() {
                 const titulo = document.createElement("h4");
                 titulo.textContent = herramienta.nombre;
                 modal.append(titulo);
+                const danio = document.createElement("p");
+                danio.textContent = "Daño: " + herramienta.danio;
+                modal.append(danio);
+                herramienta.efectos.forEach(efecto => {
+                    const p = document.createElement("p");
+                    p.textContent = efecto.nombre+": ";
+                    if(Math.round((efecto.multiplicador-1 )* 100) > 0){
+                        p.textContent += "+" + Math.round((efecto.multiplicador-1 )* 100) + "%";
+                    } else {
+                        p.textContent += Math.round((efecto.multiplicador-1 )* 100) + "%";
+                    }
+                    modal.append(p);
+                })
                 divHerramienta.append(modal);
             })
 
@@ -117,9 +134,12 @@ function mostrar_combates_bruto() {
             const arenaButton = document.createElement("button");
             arenaButton.textContent = "Arena";
             arenaButton.classList.add("btn");
-            arenaButton.addEventListener("click", () => {
-                window.location.href = "index.php?action=buscador";
-            });
+            const buscador = parseInt(new URLSearchParams(window.location.search).get("ranking"));
+            if(buscador != 1){
+                arenaButton.addEventListener("click", () => {
+                    window.location.href = "index.php?action=buscador";
+                });
+            }
             divCombate.append(arenaButton);
 
             texto.textContent = `Te quedan ${6 - combates[0].combates} combates`;

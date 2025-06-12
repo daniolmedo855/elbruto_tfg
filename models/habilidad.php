@@ -28,7 +28,21 @@
             return $habilidades;
         }
 
-        function get_habilidades_bruto($nombre){
+        public function get_habilidades_id($id_bruto) {
+            $sql = "SELECT * FROM habilidad where id_habilidad in (select id_habilidad from bruto_habilidad where id_bruto = ?);";
+            $sentencia = $this->bd->prepare($sql);
+
+            $sentencia->bind_param("i", $id_bruto);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $habilidades = $resultado->fetch_all(MYSQLI_ASSOC);
+
+            $sentencia->close();
+
+            return $habilidades;
+        }
+
+        function get_habilidades_bruto($id_bruto) {
             $sql = "SELECT id_habilidad FROM habilidad where id_habilidad in (select id_habilidad from bruto_habilidad where id_bruto = ?);";
             $sentencia = $this->bd->prepare($sql);
 
@@ -57,7 +71,7 @@
 
 
         public function get_habilidades_efecto_id($id) {
-            $sql = "select habilidad.nombre, efecto.nombre, multiplicador from bruto_habilidad join habilidad on habilidad.id_habilidad = bruto_habilidad.id_habilidad join efecto_habilidad on efecto_habilidad.id_habilidad=habilidad.id_habilidad join efecto on efecto_habilidad.id_efecto = efecto.id_efecto where bruto_habilidad.id_bruto = ?;";
+            $sql = "select habilidad.id_habilidad, habilidad.nombre, habilidad.imagen from bruto_habilidad join habilidad on habilidad.id_habilidad = bruto_habilidad.id_habilidad where bruto_habilidad.id_bruto = ?";
             $sentencia = $this->bd->prepare($sql);
             $sentencia->bind_param("i", $id);
             $sentencia->execute();
@@ -66,14 +80,24 @@
 
             $sentencia->close();
 
-            if (empty($habilidades)) {
-                return ["success" => false, "habilidades" => []];
-            }
+            return $habilidades;
+        }
+        
+        public function habilidad_random($id_bruto){
+            $sql = "select id_habilidad from habilidad where id_habilidad not in (select id_habilidad from bruto_habilidad where id_bruto = ?) order by rand() limit 1;";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $id_bruto);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $habilidad = $resultado->fetch_all(MYSQLI_ASSOC);
+            $sentencia->close();
 
-            return [
-                "success" => true,
-                "habilidades" => $habilidades
-            ];
+            $sql = "insert into bruto_habilidad (id_bruto, id_habilidad) values (?, ?);";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("ii", $id_bruto, $habilidad[0]["id_habilidad"]);
+            $sentencia->execute();
+
+            return ["success" => true, "habilidad" => $habilidad[0]["id_habilidad"]];
         }
     }
 ?>

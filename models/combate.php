@@ -14,5 +14,13 @@
             $this->id_ganador = $id_ganador;
             $this->id_perdedor = $id_perdedor;
         }
+
+        public function insertar_combate($id_ganador, $id_perdedor) {
+            $sql = "insert into combate (id_ganador, id_perdedor, fecha) values (?, ?, CURDATE())";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("ii", $id_ganador, $id_perdedor);
+            $sentencia->execute();
+            $sentencia->close();
+        }
     }
 ?>

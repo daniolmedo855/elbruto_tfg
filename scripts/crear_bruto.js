@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
             body: datos
         }).then(response => response.json())
         .then(data => {
-            console.log(data);
             if (data.success==true) {
                 alert("Creado con exito");
                 window.location.href = "index.php?action=inventario&id_bruto="+data.id_bruto;

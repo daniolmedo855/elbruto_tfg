@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2025 a las 13:58:10
+-- Tiempo de generación: 12-06-2025 a las 05:20:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -90,13 +90,9 @@ CREATE TABLE `bruto` (
 --
 
 INSERT INTO `bruto` (`id_bruto`, `nombre`, `nivel`, `vida`, `fuerza`, `velocidad`, `puntos_arena`, `experiencia`, `id_usuario`, `id_aspecto`) VALUES
-(45, 'dani', 1, 60, 5, 5, 0, 0, 11, 1),
-(53, 'dani2', 1, 50, 8, 5, 0, 0, 11, 1),
-(54, '123', 1, 50, 8, 5, 0, 0, 15, 1),
-(58, '<aaaa', 1, 60, 8, 7, 0, 0, 15, 1),
-(60, 'aaaa', 1, 60, 5, 7, 0, 0, 15, 1),
-(64, 'aaa2', 1, 60, 8, 5, 0, 0, 16, 1),
-(70, '3', 1, 50, 5, 5, 0, 0, 16, 3);
+(101, 'dani', 1, 50, 5, 5, 0, 1, 22, 2),
+(106, 'dani5', 1, 60, 5, 5, 0, 0, 22, 2),
+(111, 'Refrescos', 1, 60, 8, 7, 0, 0, 23, 2);
 
 -- --------------------------------------------------------
 
@@ -109,15 +105,6 @@ CREATE TABLE `bruto_animal` (
   `id_animal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `bruto_animal`
---
-
-INSERT INTO `bruto_animal` (`id_bruto`, `id_animal`) VALUES
-(45, 1),
-(53, 2),
-(70, 3);
-
 -- --------------------------------------------------------
 
 --
@@ -129,15 +116,6 @@ CREATE TABLE `bruto_habilidad` (
   `id_habilidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `bruto_habilidad`
---
-
-INSERT INTO `bruto_habilidad` (`id_bruto`, `id_habilidad`) VALUES
-(45, 8),
-(54, 2),
-(64, 7);
-
 -- --------------------------------------------------------
 
 --
@@ -148,14 +126,6 @@ CREATE TABLE `bruto_herramienta` (
   `id_bruto` int(11) NOT NULL,
   `id_herramienta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `bruto_herramienta`
---
-
-INSERT INTO `bruto_herramienta` (`id_bruto`, `id_herramienta`) VALUES
-(53, 7),
-(70, 5);
 
 -- --------------------------------------------------------
 
@@ -334,9 +304,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `contrasenia`, `tipo`) VALUES
-(11, 'daniolmedo855', '$2y$10$0TMIyT0P54b2Z8qZtgIlROzDCqWXCHdAHWXNbP4ioADZmt/A2eHpm', 1),
-(15, 'dani', '$2y$10$gTMuibZpUyX6FGTp6P4kk.QgPcsW.ZS5F5wZ2usFClR1KQoXzvkmy', 0),
-(16, 'prueba', '$2y$10$gB646xhWhjP7N4.3Eym89uPrXgJpJJ4IIw8pBaYG1MeUXRXtgaTKe', 0);
+(22, 'koala', '$2y$10$.LV8rf/gBNIRr6C7R0g8Lu8WavvzARSqmrvZSVmp7odiEGpwIk04a', 0),
+(23, 'admin', '$2y$10$wifpGhts9mIkb1m3QwHN8u.82KuyMtSvl0c6kqLcOkpB270N0LrTq', 1);
 
 --
 -- Índices para tablas volcadas
@@ -455,13 +424,13 @@ ALTER TABLE `aspecto`
 -- AUTO_INCREMENT de la tabla `bruto`
 --
 ALTER TABLE `bruto`
-  MODIFY `id_bruto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id_bruto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT de la tabla `combate`
 --
 ALTER TABLE `combate`
-  MODIFY `id_combate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_combate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT de la tabla `efecto`
@@ -485,7 +454,7 @@ ALTER TABLE `herramienta`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas

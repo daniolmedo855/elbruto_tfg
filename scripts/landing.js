@@ -36,6 +36,11 @@ function mostrar_habilidades() {
                 const titulo = document.createElement("h4");
                 titulo.textContent = habilidad.nombre;
                 modal.append(titulo);
+                habilidad.efectos.forEach(efecto => {
+                        const p = document.createElement("p");
+                        p.textContent = efecto.nombre+": +" + Math.round((efecto.multiplicador-1 )* 100) + "%";
+                        modal.append(p);
+                    })
                 divHabilidad.append(modal);
             })
 
@@ -63,6 +68,19 @@ function mostrar_herramientas() {
                 const titulo = document.createElement("h4");
                 titulo.textContent = herramienta.nombre;
                 modal.append(titulo);
+                const danio = document.createElement("p");
+                danio.textContent = "Daño: " + herramienta.danio;
+                modal.append(danio);
+                herramienta.efectos.forEach(efecto => {
+                    const p = document.createElement("p");
+                    p.textContent = efecto.nombre+": ";
+                    if(Math.round((efecto.multiplicador-1 )* 100) > 0){
+                        p.textContent += "+" + Math.round((efecto.multiplicador-1 )* 100) + "%";
+                    } else {
+                        p.textContent += Math.round((efecto.multiplicador-1 )* 100) + "%";
+                    }
+                    modal.append(p);
+                })
                 divHerramienta.append(modal);
             })
 

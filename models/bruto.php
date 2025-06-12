@@ -222,5 +222,94 @@
                 return ["success" => true];
             }
         }
+
+        public function actualizar_resultado($id_ganador, $id_perdedor) {
+            $sql = "update bruto set puntos_arena = puntos_arena + 1, experiencia = experiencia + 2 where id_bruto = ?";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $id_ganador);
+            $sentencia->execute();
+
+            $sql = "update bruto set experiencia = experiencia + 1 where id_bruto = ?";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $id_perdedor);
+            $sentencia->execute();
+
+            $sentencia->close();
+
+            $sql = "select id_bruto, experiencia from bruto where id_bruto = ?";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $id_ganador);
+            $sentencia->execute();
+            $sentencia->bind_result($id_bruto_ganador, $experiencia_bruto_ganador);
+            $sentencia->fetch();
+            $sentencia->close();
+
+            $sql = "select id_bruto, experiencia from bruto where id_bruto = ?";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $id_perdedor);
+            $sentencia->execute();
+            $sentencia->bind_result($id_bruto_perdedor, $experiencia_bruto_perdedor);
+            $sentencia->fetch();
+            $sentencia->close();
+
+            return ["ganador" => ["experiencia" => $experiencia_bruto_ganador, "id_bruto" => $id_bruto_ganador], "perdedor" => ["experiencia" => $experiencia_bruto_perdedor, "id_bruto" => $id_bruto_perdedor]];
+        }
+
+        public function subir_nivel($id_bruto){
+            $sql = "update bruto set nivel = nivel + 1, experiencia = 0 where id_bruto = ?";
+
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $id_bruto);
+            $sentencia->execute();
+
+            $sentencia->close();
+
+            return ["success" => true];
+        }
+
+        public function asignar_recompensa($id_bruto, $recompensa, $cantidad){
+            $recompensa_permitida = ["fuerza", "vida", "velocidad"];
+            if(!in_array($recompensa, $recompensa_permitida)){
+                return false;
+            }
+            $sql = "update bruto set $recompensa = $recompensa + $cantidad where id_bruto = ?";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $id_bruto);
+            $sentencia->execute();
+            $sentencia->close();
+
+            return ["success" => true];
+        }
+        public function get_brutos_ranking(){
+            $sql = "select bruto.id_bruto, bruto.nombre, bruto.puntos_arena, bruto.id_aspecto from bruto order by puntos_arena desc";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $brutos = $resultado->fetch_all(MYSQLI_ASSOC);
+            $sentencia->close();
+            return $brutos;
+        }
+
+        public function get_brutos_admin(){
+            $sql = "select bruto.id_bruto, bruto.nombre, bruto.experiencia, bruto.nivel, bruto.vida, bruto.fuerza, bruto.velocidad, bruto.puntos_arena, bruto.id_aspecto, usuario.nombre nombre_usuario from bruto inner join usuario on bruto.id_usuario = usuario.id_usuario";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $brutos = $resultado->fetch_all(MYSQLI_ASSOC);
+            $sentencia->close();
+            return $brutos;
+        }
+
+        public function borrar_bruto($id_bruto) {
+            $sql = "DELETE FROM bruto WHERE id_bruto = ?";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->bind_param("i", $id_bruto);
+            $sentencia->execute();
+            
+            $filas_afectadas = $sentencia->affected_rows;
+            $sentencia->close();
+
+            return $filas_afectadas > 0;
+        }
     }
 ?>

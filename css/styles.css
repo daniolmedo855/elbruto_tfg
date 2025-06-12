@@ -44,7 +44,7 @@ h3{
     font-size: 2.5rem;
 }
 
-a, p, h4, input, .btn{
+a, p, h4, input, .btn, .cronologia{
     font-family: "Bangers", system-ui;
     font-weight: 100;
     font-style: normal;
@@ -63,6 +63,7 @@ a{
     border-radius: 5px;
     box-shadow: 4px 4px 0 var(--color-fondo);
     transition: all 0.3s ease-in-out;
+    white-space: nowrap;
 }
 
 .btn:hover{
@@ -290,8 +291,13 @@ section.combate>div>div>div>div>div.modal{
     transform: translateX(-50%);
 }
 
-section.combate>div>div>div>div>div.modal>h4{
+div.modal>h4{
     white-space: nowrap;
+}
+
+div.modal>p{
+    white-space: nowrap;
+    color: #4caf50;
 }
 
 /*MASCOTAS*/
@@ -660,5 +666,267 @@ section.fondo{
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center center;
+    width: 100%; /* o cualquier otro valor deseado */
     height: 100vh;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 6% 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section.fondo>div.marcadores{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+section.fondo>div.marcadores>div.vida1, section.fondo>div.marcadores>div.vida2{
+  width: 20%;
+  height: 24px;
+  background-color: #333;
+  border: 2px solid #666;
+  border-radius: 6px;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+section.fondo>div.marcadores>div.vida1>div.barra_vida1, section.fondo>div.marcadores>div.vida2>div.barra_vida2{
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, #00c853, #64dd17);
+  border-radius: 4px;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+section.fondo>div.peleadores{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section.fondo>div.peleadores>div.bruto1{
+    width: 20%;
+    display: flex;
+    justify-content: start;
+    align-items: end;
+}
+
+section.fondo>div.peleadores>div.bruto2{
+    width: 20%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+section.fondo>div.peleadores>div.bruto1>img.bruto{
+    width: 100%;
+    transform: scaleX(-1);
+}
+
+section.fondo>div.peleadores>div.bruto1>img.Lobo{
+    transform: scaleX(-1);
+}
+
+section.fondo>div.peleadores>div.bruto2>img.bruto{
+    width: 100%;
+}
+
+section.fondo>div.peleadores>div.bruto2>img.Oso{
+    transform: scaleX(-1);
+    width: 200px;
+}
+
+section.fondo>div.peleadores>div.bruto2>img.Perro{
+    transform: scaleX(-1);
+}
+
+section.fondo>div.peleadores>div{
+    position: relative;
+}
+
+section.fondo>div.peleadores>div>img.ataque{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+}
+
+section.fondo>div.cronologia{
+    position: absolute;
+    top: 20%;
+    background-color: var(--color-texto);
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.39);
+}
+
+section.fondo>div.cronologia>p{
+    color: var(--color-texto-secundario);
+}
+
+.daño {
+  animation: efecto-daño 0.2s ease-in-out;
+}
+
+@keyframes efecto-daño {
+  0%   { filter: brightness(1.5) saturate(2) hue-rotate(-30deg); }
+  50%  { filter: none; }
+  100% { filter: brightness(1.5) saturate(2) hue-rotate(-30deg); }
+}
+
+/*RANKING*/
+section.ranking>h2{
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+section.ranking>div{
+    flex-direction: column;
+}
+
+section.ranking>div>div{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 1% 0;
+}
+
+section.ranking>div>div>img{
+    width: 100px;
+}
+
+/*ADMIN*/
+section.admin{
+    text-align: center;
+    padding: 2%;
+}
+
+section.admin>div.buscador{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: auto;
+}
+
+section.admin>div.buscador>.btn{
+    border:none;
+}
+
+section.admin>div.buscador>form.form_admin>select{
+    padding: 5% 10%;
+    border: solid 5px var(--color-secundario);
+    border-radius: 6px;
+    background-color: var(--color-primario);
+    color: var(--color-secundario);
+    font-size: 1.2em;
+}
+
+section.admin>div.buscador>form.form_admin>select:focus{
+    outline: none;
+}
+
+section.admin>div.tabla{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2%;
+}
+
+section.admin>div.tabla>table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+section.admin>div.tabla>table>tr{
+    height: 50px;
+    cursor: pointer;
+}
+
+section.admin>div.tabla>table>tr:not(:first-child):hover{
+    background-color: var(--color-secundario);
+    color: var(--color-primario);
+}
+
+section.admin>div.tabla>table>tr:not(:first-child):hover>button{
+    color: var(--color-primario);
+    border: solid 1px var(--color-primario);
+}
+
+section.admin>div.tabla>table>tr>td{
+    padding: 0 4%;
+}
+
+section.admin>div.tabla>table>tr>button{
+    width: 50%;
+    height: 50px;
+    padding: 2%;
+    background-color: transparent;
+    cursor: pointer;
+    border: solid 1px var(--color-secundario);
+    color: var(--color-secundario);
+    font-size: 1.2em
+}
+
+section.admin>div.tabla>table>tr:nth-child(2n){
+    background-color: var(--color-fondo);
+    color: #fff6b0;
+}
+
+section.admin>div.tabla>table>tr:nth-child(2n)>button{
+    color: #fff6b0;
+}
+
+section.admin>form.form_admin{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+    background-color: var(--color-primario);
+    padding: 2%;
+    border: solid 5px var(--color-secundario);
+    border-radius: 6px;
+}
+
+section.admin>form.form_admin>input:not(input[type="submit"]){
+    width: 100%;
+    background-color: var(--color-primario);
+    border: solid 5px var(--color-secundario);
+    border-radius: 6px;
+    padding: 2% 5%;
+    margin: 2% 0;
+    margin-bottom: 5%;
+    color: var(--color-texto);
+    font-size: 1.2em;
+}
+
+section.admin>form.form_admin>select{
+    background-color: var(--color-primario);
+    border: solid 5px var(--color-secundario);
+    border-radius: 6px;
+    padding: 2% 5%;
+    margin: 2% 0;
+    margin-bottom: 5%;
+    color: var(--color-texto);
+    width: 100%;
+    font-size: 1.2em;
+}
+
+section.admin>form.form_admin>input:not(input[type="submit"]):focus{
+    outline: none;
+}
+
+section.admin>form.form_admin>input[type="submit"]{ 
+    border: none;
 }

@@ -8,7 +8,7 @@ function mostrar_brutos() {
         brutos.forEach(bruto => {
             const divBruto = document.createElement("div");
             const imgBruto = document.createElement("img");
-            if(bruto.imagen==null){
+            if(bruto.id_aspecto==null){
                 imgBruto.src = "img/aspectos/aspecto_1.png";
             } else {
                 imgBruto.src = `img/aspectos/aspecto_${bruto.id_aspecto}.png`;
@@ -17,7 +17,7 @@ function mostrar_brutos() {
             nombre.textContent = bruto.nombre;
 
             divBruto.addEventListener("click", () => {
-                window.location.href = `index.php?action=inventario&id=${bruto.id_bruto}`;
+                window.location.href = `index.php?action=inventario&id_bruto=${bruto.id_bruto}`;
             });
 
             divBruto.append(imgBruto);
