@@ -1007,6 +1007,10 @@ section.fondo>div.marcadores>div.vida1, section.fondo>div.marcadores>div.vida2{
   box-sizing: border-box;
 }
 
+section.fondo>div.marcadores>div.vida2{
+    transform: scaleX(-1);
+ }
+
 section.fondo>div.marcadores>div.vida1>div.barra_vida1, section.fondo>div.marcadores>div.vida2>div.barra_vida2{
   height: 100%;
   width: 100%;
@@ -1208,14 +1212,21 @@ section.fondo>div.peleadores>div.bruto2>img.Hacha{
 
 section.fondo>div.peleadores>div>h2{
     position: absolute;
-    bottom: -100px;
+    bottom: -60%;
     left: 50%;
     transform: translateX(-50%);
     color: var(--color-texto-secundario);
     background-color: rgb(0, 0, 0, 0.39);
     padding: 5%;
     border-radius: 6px;
-    font-size: 50px;
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 1000px) {
+    section.fondo>div.peleadores>div>h2{
+        font-size: 1.5rem;
+    }
+    
 }
 
 section.fondo>div.peleadores>div{

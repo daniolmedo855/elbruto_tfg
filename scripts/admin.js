@@ -86,7 +86,6 @@ function mostrar_tabla(array, tipo) {
                             alert("Error en la conexión con el servidor");
                         });
                     } else if(tipo=="bruto_animal"){
-                        console.log(element);
                         fetch(`controllers/controller.php?action=borrar_bruto_animal&id_bruto=${element.id_bruto}&id_animal=${element.id_animal}`)
                         .then(res => res.json())
                         .then(data => {

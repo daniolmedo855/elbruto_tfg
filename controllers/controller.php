@@ -353,50 +353,7 @@
         $combate->insertar_combate($id_ganador, $id_perdedor);
         $brutos = $bruto->actualizar_resultado($id_ganador, $id_perdedor);
 
-        if($brutos["ganador"]["experiencia"]>=10){
-            $bruto->subir_nivel($brutos["ganador"]["id_bruto"]);
-
-            $recompensas = ["estadisticas", "habilidad", "herramienta", "animal"];
-            $aleatoria = $recompensas[mt_rand(0, count($recompensas) - 1)];
-            
-            switch($aleatoria){
-                case "estadisticas":
-                    $aleatoria = ["vida", "fuerza", "velocidad"];
-                    $aleatoria = $aleatoria[mt_rand(0, count($aleatoria) - 1)];
-                    $cantidad = mt_rand(1, 2);
-                    $brutos["recompensa"] = $bruto->asignar_recompensa($brutos["ganador"]["id_bruto"], $aleatoria, $cantidad);
-                    $brutos["sube"] =  ["ganador", "estadisticas"];
-                    break;
-                case "habilidad":
-                    require_once "../models/habilidad.php";
-                    $habilidad = new Habilidad();
-                    $brutos["recompensa"] = $habilidad->habilidad_random($brutos["ganador"]["id_bruto"]);
-                    $brutos["sube"] =  ["ganador", "habilidad"];
-                    break;
-                case "herramienta":
-                    require_once "../models/herramienta.php";
-                    $herramienta = new Herramienta();
-                    $brutos["recompensa"] = $herramienta->herramienta_random($brutos["ganador"]["id_bruto"]);
-                    $brutos["sube"] =  ["ganador", "herramienta"];
-                    break;
-                case "animal":
-                    require_once "../models/animal.php";
-                    $animal = new Animal();
-                    if($animal->get_animales_id($brutos["ganador"]["id_bruto"])>0){
-                        $aleatoria = ["vida", "fuerza", "velocidad"];
-                        $aleatoria = $aleatoria[mt_rand(0, count($aleatoria) - 1)];
-                        $cantidad = mt_rand(1, 2);
-                        $brutos["recompensa"] = $bruto->asignar_recompensa($brutos["ganador"]["id_bruto"], $aleatoria, $cantidad);
-                        $brutos["sube"] =  ["ganador", "estadisticas"];
-                    } else {
-                        $brutos["recompensa"] = $animal->animal_random($brutos["ganador"]["id_bruto"]);
-                        $brutos["sube"] =  ["ganador", "animal"];
-                    }
-                    break;
-            }
-
-            
-        }
+        
 
         if($brutos["perdedor"]["experiencia"]>=10){
             $bruto->subir_nivel($brutos["perdedor"]["id_bruto"]);
@@ -439,6 +396,51 @@
                     }
                     break;
             }
+            
+        }
+
+        if($brutos["ganador"]["experiencia"]>=10){
+            $bruto->subir_nivel($brutos["ganador"]["id_bruto"]);
+
+            $recompensas = ["estadisticas", "habilidad", "herramienta", "animal"];
+            $aleatoria = $recompensas[mt_rand(0, count($recompensas) - 1)];
+            
+            switch($aleatoria){
+                case "estadisticas":
+                    $aleatoria = ["vida", "fuerza", "velocidad"];
+                    $aleatoria = $aleatoria[mt_rand(0, count($aleatoria) - 1)];
+                    $cantidad = mt_rand(1, 2);
+                    $brutos["recompensa"] = $bruto->asignar_recompensa($brutos["ganador"]["id_bruto"], $aleatoria, $cantidad);
+                    $brutos["sube"] =  ["ganador", "estadisticas"];
+                    break;
+                case "habilidad":
+                    require_once "../models/habilidad.php";
+                    $habilidad = new Habilidad();
+                    $brutos["recompensa"] = $habilidad->habilidad_random($brutos["ganador"]["id_bruto"]);
+                    $brutos["sube"] =  ["ganador", "habilidad"];
+                    break;
+                case "herramienta":
+                    require_once "../models/herramienta.php";
+                    $herramienta = new Herramienta();
+                    $brutos["recompensa"] = $herramienta->herramienta_random($brutos["ganador"]["id_bruto"]);
+                    $brutos["sube"] =  ["ganador", "herramienta"];
+                    break;
+                case "animal":
+                    require_once "../models/animal.php";
+                    $animal = new Animal();
+                    if($animal->get_animales_id($brutos["ganador"]["id_bruto"])>0){
+                        $aleatoria = ["vida", "fuerza", "velocidad"];
+                        $aleatoria = $aleatoria[mt_rand(0, count($aleatoria) - 1)];
+                        $cantidad = mt_rand(1, 2);
+                        $brutos["recompensa"] = $bruto->asignar_recompensa($brutos["ganador"]["id_bruto"], $aleatoria, $cantidad);
+                        $brutos["sube"] =  ["ganador", "estadisticas"];
+                    } else {
+                        $brutos["recompensa"] = $animal->animal_random($brutos["ganador"]["id_bruto"]);
+                        $brutos["sube"] =  ["ganador", "animal"];
+                    }
+                    break;
+            }
+
             
         }
 

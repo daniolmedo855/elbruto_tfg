@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2025 a las 01:03:08
+-- Tiempo de generación: 27-06-2025 a las 01:46:54
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -90,8 +90,8 @@ CREATE TABLE `bruto` (
 --
 
 INSERT INTO `bruto` (`id_bruto`, `nombre`, `nivel`, `vida`, `fuerza`, `velocidad`, `puntos_arena`, `experiencia`, `id_usuario`, `id_aspecto`) VALUES
-(106, 'dani', 5, 60, 10, 6, 22, 9, 22, 2),
-(123, 'koala', 1, 60, 5, 7, 1, 2, 28, 1),
+(106, 'dani', 6, 60, 10, 6, 22, 1, 22, 2),
+(123, 'koala', 1, 60, 5, 7, 1, 8, 28, 1),
 (200, 'bruto1_1', 1, 50, 1, 1, 0, 0, 30, 1),
 (201, 'bruto1_2', 1, 50, 1, 1, 0, 0, 30, 2),
 (202, 'bruto2_1', 1, 50, 1, 1, 0, 0, 31, 1),
@@ -103,16 +103,16 @@ INSERT INTO `bruto` (`id_bruto`, `nombre`, `nivel`, `vida`, `fuerza`, `velocidad
 (208, 'bruto5_1', 1, 50, 1, 1, 0, 0, 34, 1),
 (209, 'bruto5_2', 1, 50, 1, 1, 0, 0, 34, 2),
 (210, 'bruto6_1', 1, 50, 1, 1, 0, 0, 35, 1),
-(211, 'bruto6_2', 1, 50, 1, 1, 0, 0, 35, 2),
-(212, 'bruto7_1', 1, 50, 1, 1, 0, 0, 36, 1),
-(213, 'bruto7_2', 1, 50, 1, 1, 0, 0, 36, 2),
+(211, 'bruto6_2', 1, 50, 1, 1, 4, 9, 35, 2),
+(212, 'bruto7_1', 2, 50, 1, 1, 6, 5, 36, 1),
+(213, 'bruto7_2', 1, 50, 1, 1, 0, 3, 36, 2),
 (214, 'bruto8_1', 1, 50, 1, 1, 0, 0, 37, 1),
 (215, 'bruto8_2', 1, 50, 1, 1, 0, 0, 37, 2),
 (216, 'bruto9_1', 1, 50, 1, 1, 0, 0, 38, 1),
 (217, 'bruto9_2', 1, 50, 1, 1, 0, 0, 38, 2),
-(218, 'bruto10_1', 1, 50, 1, 1, 0, 0, 39, 1),
-(219, 'bruto10_2', 1, 50, 1, 1, 0, 0, 39, 2),
-(220, 'Izquierdo', 1, 60, 5, 7, 0, 1, 28, 4);
+(218, 'bruto10_1', 1, 50, 1, 1, 0, 2, 39, 1),
+(219, 'bruto10_2', 1, 50, 1, 1, 0, 9, 39, 2),
+(220, 'Izquierdo', 10, 62, 9, 8, 8, 0, 28, 4);
 
 -- --------------------------------------------------------
 
@@ -163,6 +163,7 @@ INSERT INTO `bruto_habilidad` (`id_bruto`, `id_habilidad`) VALUES
 (210, 1),
 (211, 2),
 (212, 3),
+(212, 10),
 (213, 4),
 (214, 5),
 (215, 6),
@@ -170,6 +171,7 @@ INSERT INTO `bruto_habilidad` (`id_bruto`, `id_habilidad`) VALUES
 (217, 8),
 (218, 9),
 (219, 10),
+(220, 1),
 (220, 10);
 
 -- --------------------------------------------------------
@@ -188,6 +190,7 @@ CREATE TABLE `bruto_herramienta` (
 --
 
 INSERT INTO `bruto_herramienta` (`id_bruto`, `id_herramienta`) VALUES
+(106, 4),
 (123, 7),
 (200, 1),
 (201, 2),
@@ -209,6 +212,9 @@ INSERT INTO `bruto_herramienta` (`id_bruto`, `id_herramienta`) VALUES
 (217, 4),
 (218, 5),
 (219, 6),
+(220, 1),
+(220, 3),
+(220, 4),
 (220, 5);
 
 -- --------------------------------------------------------
@@ -229,8 +235,9 @@ CREATE TABLE `combate` (
 --
 
 INSERT INTO `combate` (`id_combate`, `fecha`, `id_ganador`, `id_perdedor`) VALUES
-(210, '2025-06-27 00:00:00', 123, 106),
-(211, '2025-06-27 00:00:00', 106, 220);
+(301, '2025-06-27 00:00:00', 220, 212),
+(302, '2025-06-27 00:00:00', 220, 212),
+(303, '2025-06-27 00:00:00', 220, 212);
 
 -- --------------------------------------------------------
 
@@ -408,7 +415,9 @@ INSERT INTO `usuario` (`id_usuario`, `nombre`, `contrasenia`, `tipo`) VALUES
 (36, 'user7', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
 (37, 'user8', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
 (38, 'user9', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
-(39, 'user10', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0);
+(39, 'user10', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
+(40, 'daniolmedo855', '$2y$10$p5UEHA9lhUFnwwHRIzwRjum/zYGyT27qmLvLqX.qR9CfdSVYrSkAm', 0),
+(41, 'dani', '$2y$10$ph39E4R8fPufM3Q/tDkzE..s/wL34Nmv8H1mIdRhCkHwKbSb0XkkG', 0);
 
 --
 -- Índices para tablas volcadas
@@ -533,7 +542,7 @@ ALTER TABLE `bruto`
 -- AUTO_INCREMENT de la tabla `combate`
 --
 ALTER TABLE `combate`
-  MODIFY `id_combate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+  MODIFY `id_combate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
 
 --
 -- AUTO_INCREMENT de la tabla `efecto`
@@ -557,7 +566,7 @@ ALTER TABLE `herramienta`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- Restricciones para tablas volcadas

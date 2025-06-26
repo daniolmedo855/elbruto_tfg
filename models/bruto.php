@@ -235,36 +235,48 @@
         }
 
         public function actualizar_resultado($id_ganador, $id_perdedor) {
-            $sql = "update bruto set puntos_arena = puntos_arena + 1, experiencia = experiencia + 2 where id_bruto = ?";
-            $sentencia = $this->bd->prepare($sql);
-            $sentencia->bind_param("i", $id_ganador);
-            $sentencia->execute();
+    // Ganador: +2 experiencia, +1 punto de arena
+    $sql = "UPDATE bruto SET puntos_arena = puntos_arena + 1, experiencia = experiencia + 2 WHERE id_bruto = ?";
+    $stmt_ganador = $this->bd->prepare($sql);
+    $stmt_ganador->bind_param("i", $id_ganador);
+    $stmt_ganador->execute();
+    $stmt_ganador->close();
 
-            $sql = "update bruto set experiencia = experiencia + 1 where id_bruto = ?";
-            $sentencia = $this->bd->prepare($sql);
-            $sentencia->bind_param("i", $id_perdedor);
-            $sentencia->execute();
+    // Perdedor: +1 experiencia
+    $sql = "UPDATE bruto SET experiencia = experiencia + 1 WHERE id_bruto = ?";
+    $stmt_perdedor = $this->bd->prepare($sql);
+    $stmt_perdedor->bind_param("i", $id_perdedor);
+    $stmt_perdedor->execute();
+    $stmt_perdedor->close();
 
-            $sentencia->close();
+    // Recuperar experiencia actualizada del ganador
+    $sql = "SELECT id_bruto, experiencia FROM bruto WHERE id_bruto = ?";
+    $stmt_ganador = $this->bd->prepare($sql);
+    $stmt_ganador->bind_param("i", $id_ganador);
+    $stmt_ganador->execute();
+    $stmt_ganador->bind_result($id_bruto_ganador, $experiencia_bruto_ganador);
+    $stmt_ganador->fetch();
+    $stmt_ganador->close();
 
-            $sql = "select id_bruto, experiencia from bruto where id_bruto = ?";
-            $sentencia = $this->bd->prepare($sql);
-            $sentencia->bind_param("i", $id_ganador);
-            $sentencia->execute();
-            $sentencia->bind_result($id_bruto_ganador, $experiencia_bruto_ganador);
-            $sentencia->fetch();
-            $sentencia->close();
+    // Recuperar experiencia actualizada del perdedor
+    $stmt_perdedor = $this->bd->prepare($sql);
+    $stmt_perdedor->bind_param("i", $id_perdedor);
+    $stmt_perdedor->execute();
+    $stmt_perdedor->bind_result($id_bruto_perdedor, $experiencia_bruto_perdedor);
+    $stmt_perdedor->fetch();
+    $stmt_perdedor->close();
 
-            $sql = "select id_bruto, experiencia from bruto where id_bruto = ?";
-            $sentencia = $this->bd->prepare($sql);
-            $sentencia->bind_param("i", $id_perdedor);
-            $sentencia->execute();
-            $sentencia->bind_result($id_bruto_perdedor, $experiencia_bruto_perdedor);
-            $sentencia->fetch();
-            $sentencia->close();
-
-            return ["ganador" => ["experiencia" => $experiencia_bruto_ganador, "id_bruto" => $id_bruto_ganador], "perdedor" => ["experiencia" => $experiencia_bruto_perdedor, "id_bruto" => $id_bruto_perdedor]];
-        }
+    return [
+        "ganador" => [
+            "id_bruto" => $id_bruto_ganador,
+            "experiencia" => $experiencia_bruto_ganador
+        ],
+        "perdedor" => [
+            "id_bruto" => $id_bruto_perdedor,
+            "experiencia" => $experiencia_bruto_perdedor
+        ]
+    ];
+}
 
         public function subir_nivel($id_bruto){
             $sql = "update bruto set nivel = nivel + 1, experiencia = 0 where id_bruto = ?";

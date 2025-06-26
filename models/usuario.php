@@ -107,7 +107,7 @@
                     if($tipo == 1) {
                         return ["success" => true, "admin" => true];
                     }
-                    return ["success" => true];
+                    return ["success" => true, "admin" => false];
                 } else {
                     return ["success" => false, "error" => "La contraseña es incorrecta."];
                 }
