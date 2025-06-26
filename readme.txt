@@ -16,13 +16,5 @@ Una recreación no oficial del clásico juego **El Bruto** usando tecnologías w
 
 - **PHP** – Backend y lógica del juego
 - **JavaScript** – Interacciones del cliente y animaciones
-- **MySQL** – Base de datos para usuarios y combates
+- **SQL** – Base de datos
 - **HTML/CSS** – Interfaz del usuario
-
-## 📦 Instalación
-
-1. Clona este repositorio:
-
-   ```bash
-   git clone https://github.com/tuusuario/elbruto-clon.git
-   cd elbruto-clon
