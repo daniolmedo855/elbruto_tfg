@@ -2,7 +2,7 @@
     header("Content-Type: application/json");
     if (isset($_REQUEST["action"])) {
         $accion = strtolower(trim($_REQUEST["action"]));
-        $acciones_permitidas = ["get_usuarios", "get_brutos", "get_aspectos", "get_brutos_admin","get_habilidades", "get_herramientas","get_habilidades_bruto","get_herramientas_bruto", "get_brutos_nombre", "get_bruto_id", "get_animales_bruto", "get_combates_bruto", "get_id_bruto", "get_retado_bruto", "get_retador_bruto",  "get_retado_habilidades", "get_retador_habilidades","get_retado_herramientas", "get_retador_herramientas","get_retador_animales", "actualizar_resultado", "get_retado_animales", "get_brutos_ranking","crear_bruto" ,"borrar_usuario", "borrar_bruto"];
+        $acciones_permitidas = ["get_usuarios", "get_brutos", "get_aspectos", "get_brutos_all", "get_brutos_admin","get_habilidades_admin","get_habilidades", "get_herramientas", "get_herramientas_admin","get_habilidades_bruto","get_herramientas_bruto", "get_brutos_nombre", "get_bruto_id", "get_animales_bruto", "get_combates_bruto", "get_id_bruto", "get_retado_bruto", "get_retador_bruto",  "get_retado_habilidades", "get_retador_habilidades","get_retado_herramientas", "get_retador_herramientas","get_retador_animales", "actualizar_resultado", "get_retado_animales", "get_brutos_ranking","crear_bruto" ,"borrar_usuario", "borrar_bruto", "borrar_bruto_habilidad", "borrar_bruto_herramienta", "borrar_bruto_animal",  "get_animales_admin", "get_animales_all"];
         if (in_array($accion, $acciones_permitidas)) {
             $accion();
         }
@@ -32,6 +32,42 @@
         $bd = new Bruto();
         $brutos = $bd->get_brutos_admin();
         echo json_encode($brutos);
+    }
+
+    function get_brutos_all(){
+        require_once "../models/bruto.php";
+        sesion();
+        $bd = new Bruto();
+        $brutos = $bd->get_brutos_all();
+        echo json_encode($brutos);
+    }
+
+    function get_habilidades_admin(){
+        require_once "../models/bruto.php";
+        $bd = new Bruto();
+        $habilidades = $bd->get_habilidades_admin();
+        echo json_encode($habilidades);
+    }
+
+    function get_herramientas_admin(){
+        require_once "../models/bruto.php";
+        $bd = new Bruto();
+        $herramientas = $bd->get_herramientas_admin();
+        echo json_encode($herramientas);
+    }
+
+    function get_animales_admin() {
+        require_once "../models/bruto.php";
+        $bd = new Bruto();
+        $animales = $bd->get_animales_admin();
+        echo json_encode($animales);
+    }
+
+    function get_animales_all() {
+        require_once "../models/animal.php";
+        $bd = new Animal();
+        $animales = $bd->get_animales_all();
+        echo json_encode($animales);
     }
 
     function get_aspectos() {
@@ -434,6 +470,51 @@
             echo json_encode(["success" => true]);
         } else {
             echo json_encode(["success" => false, "error" => "No se pudo borrar el bruto."]);
+        }
+    }
+
+    function borrar_bruto_habilidad() {
+        require_once "../models/bruto.php";
+        $bd = new Bruto();
+        $id_bruto = $_GET["id_bruto"];
+        $id_habilidad = $_GET["id_habilidad"];
+
+        $resultado = $bd->borrar_bruto_habilidad($id_bruto, $id_habilidad);
+
+        if ($resultado) {
+            echo json_encode(["success" => true]);
+        } else {
+            echo json_encode(["success" => false, "error" => "No se pudo borrar."]);
+        }
+    }
+
+    function borrar_bruto_herramienta() {
+        require_once "../models/bruto.php";
+        $bd = new Bruto();
+        $id_bruto = $_GET["id_bruto"];
+        $id_herramienta = $_GET["id_herramienta"];
+
+        $resultado = $bd->borrar_bruto_herramienta($id_bruto, $id_herramienta);
+
+        if ($resultado) {
+            echo json_encode(["success" => true]);
+        } else {
+            echo json_encode(["success" => false, "error" => "No se pudo borrar."]);
+        }
+    }
+
+    function borrar_bruto_animal() {
+        require_once "../models/bruto.php";
+        $bd = new Bruto();
+        $id_bruto = $_GET["id_bruto"];
+        $id_animal = $_GET["id_animal"];
+
+        $resultado = $bd->borrar_bruto_animal($id_bruto, $id_animal);
+
+        if ($resultado) {
+            echo json_encode(["success" => true]);
+        } else {
+            echo json_encode(["success" => false, "error" => "No se pudo borrar."]);
         }
     }
 

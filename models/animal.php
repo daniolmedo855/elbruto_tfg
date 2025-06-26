@@ -66,6 +66,18 @@
             $sentencia->bind_param("ii", $id_bruto, $animal[0]["id_animal"]);
             $sentencia->execute();
 
-            return ["success" => true, "animal" => $animal[0]["id_animal"]];        }
+            return ["success" => true, "animal" => $animal[0]["id_animal"]];        
+        }
+
+
+        public function get_animales_all() {
+            $sql = "select * from animal;";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $animal = $resultado->fetch_all(MYSQLI_ASSOC);
+            $sentencia->close();
+            return $animal;
+        }
     }
 ?>

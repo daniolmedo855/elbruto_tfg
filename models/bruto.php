@@ -39,6 +39,17 @@
             return $brutos;
         }
 
+        function get_brutos_all() {
+            $sql = "SELECT * FROM bruto";
+            $sentencia = $this->bd->prepare($sql);
+
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $brutos = $resultado->fetch_all(MYSQLI_ASSOC);
+            $sentencia->close();
+            return $brutos;
+        }
+
         public function get_brutos_nombre($nombre) {
             $sql = "SELECT * FROM bruto where id_usuario = (select id_usuario from usuario where nombre = ?)";
             $sentencia = $this->bd->prepare($sql);
@@ -300,9 +311,42 @@
             return $brutos;
         }
 
+        public function get_habilidades_admin(){
+            $sql = "select bruto_habilidad.id_bruto, bruto.nombre bruto_nombre, bruto_habilidad.id_habilidad, habilidad.nombre habilidad_nombre from bruto_habilidad join bruto on bruto_habilidad.id_bruto = bruto.id_bruto join habilidad on bruto_habilidad.id_habilidad = habilidad.id_habilidad order by id_bruto";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $brutos = $resultado->fetch_all(MYSQLI_ASSOC);
+            $sentencia->close();
+            return $brutos;
+        }
+
+        public function get_herramientas_admin(){
+            $sql = "select bruto_herramienta.id_bruto, bruto.nombre bruto_nombre, bruto_herramienta.id_herramienta, herramienta.nombre herramienta_nombre from bruto_herramienta join bruto on bruto_herramienta.id_bruto = bruto.id_bruto join herramienta on bruto_herramienta.id_herramienta = herramienta.id_herramienta order by id_bruto";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $brutos = $resultado->fetch_all(MYSQLI_ASSOC);
+            $sentencia->close();
+            return $brutos;
+        }
+
+        function get_animales_admin() {
+            $sql = "select bruto_animal.id_bruto, bruto.nombre bruto_nombre, bruto_animal.id_animal, animal.nombre animal_nombre from bruto_animal join bruto on bruto_animal.id_bruto = bruto.id_bruto join animal on bruto_animal.id_animal = animal.id_animal order by id_bruto";
+            $sentencia = $this->bd->prepare($sql);
+            $sentencia->execute();
+            $resultado = $sentencia->get_result();
+            $brutos = $resultado->fetch_all(MYSQLI_ASSOC);
+            $sentencia->close();
+            return $brutos;
+        }
+
         public function borrar_bruto($id_bruto) {
             $sql = "DELETE FROM bruto WHERE id_bruto = ?";
             $sentencia = $this->bd->prepare($sql);
+            if (!$sentencia) {
+                return ["success" => false, "error" => "Error en prepare: " . $this->bd->error];
+            }
             $sentencia->bind_param("i", $id_bruto);
             $sentencia->execute();
             
@@ -310,6 +354,64 @@
             $sentencia->close();
 
             return $filas_afectadas > 0;
+        }
+
+        public function borrar_bruto_habilidad($id_bruto, $id_habilidad) {
+            $sql = "DELETE FROM bruto_habilidad WHERE id_bruto = ? and id_habilidad = ?";
+            $sentencia = $this->bd->prepare($sql);
+            if (!$sentencia) {
+                return ["success" => false, "error" => "Error en prepare: " . $this->bd->error];
+            }
+            $sentencia->bind_param("ii", $id_bruto, $id_habilidad);
+            $sentencia->execute();
+            
+            $filas_afectadas = $sentencia->affected_rows;
+            $sentencia->close();
+
+            return $filas_afectadas > 0;
+        }
+
+        public function borrar_bruto_herramienta($id_bruto, $id_herramienta) {
+            $sql = "DELETE FROM bruto_herramienta WHERE id_bruto = ? and id_herramienta = ?";
+            $sentencia = $this->bd->prepare($sql);
+            if (!$sentencia) {
+                return ["success" => false, "error" => "Error en prepare: " . $this->bd->error];
+            }
+            $sentencia->bind_param("ii", $id_bruto, $id_herramienta);
+            $sentencia->execute();
+            
+            $filas_afectadas = $sentencia->affected_rows;
+            $sentencia->close();
+
+            return $filas_afectadas > 0;
+        }
+
+        public function borrar_bruto_animal($id_bruto, $id_animal) {
+            $sql = "DELETE FROM bruto_animal WHERE id_bruto = ? and id_animal = ?";
+            $sentencia = $this->bd->prepare($sql);
+            if (!$sentencia) {
+                return ["success" => false, "error" => "Error en prepare: " . $this->bd->error];
+            }
+            $sentencia->bind_param("ii", $id_bruto, $id_animal);
+            $sentencia->execute();
+            
+            $filas_afectadas = $sentencia->affected_rows;
+            $sentencia->close();
+
+            return $filas_afectadas > 0;
+        }
+
+
+        public function modificar_bruto($id_bruto, $variable, $tipo) {
+            $sql = "UPDATE bruto SET $tipo = ? WHERE id_bruto = ?";
+            $sentencia = $this->bd->prepare($sql);
+            if (!$sentencia) {
+                return ["success" => false, "error" => "Error en prepare: " . $this->bd->error];
+            }
+            $sentencia->bind_param("si", $variable, $id_bruto);
+            $sentencia->execute();
+            $sentencia->close();
+            return ["success" => true];
         }
     }
 ?>

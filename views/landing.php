@@ -17,24 +17,27 @@
     </section>
     
     <section class="apariencia">
-        <div class="carrusel">
-            <button class="anterior">←</button>
-            <div class="imagenes">
-                <img src="img/aspectos/aspecto_1.png" alt="">
-                <img src="img/aspectos/aspecto_2.png" alt="">
-                <img src="img/aspectos/aspecto_3.png" alt="">
-                <img src="img/aspectos/aspecto_4.png" alt="">
-                <img src="img/aspectos/aspecto_5.png" alt="">
-                <img src="img/aspectos/aspecto_6.png" alt="">
+        <h2>Nueva Apariencia de Personajes</h2>
+        <div>
+            <div class="carrusel">
+                <button class="anterior">←</button>
+                <div class="imagenes">
+                    <img src="img/aspectos/aspecto_1.png" alt="">
+                    <img src="img/aspectos/aspecto_2.png" alt="">
+                    <img src="img/aspectos/aspecto_3.png" alt="">
+                    <img src="img/aspectos/aspecto_4.png" alt="">
+                    <img src="img/aspectos/aspecto_5.png" alt="">
+                    <img src="img/aspectos/aspecto_6.png" alt="">
+                </div>
+                <button class="siguiente">→</button>
             </div>
-            <button class="siguiente">→</button>
+            <div class="texto">
+                <p>Bienvenido a la nueva era de ElBruto: con un diseño visual completamente renovado, nuestros personajes clásicos regresan con más estilo, detalle y personalidad que nunca. <br><br>
+                Esta renovación no es solo una mejora gráfica: es una declaración de intenciones. Los luchadores están listos para el combate… y lucen mejor que nunca.
+                </p>
+            </div>
         </div>
-        <div class="texto">
-            <h2>Nueva Apariencia de Personajes</h2>
-            <p>Bienvenido a la nueva era de ElBruto: con un diseño visual completamente renovado, nuestros personajes clásicos regresan con más estilo, detalle y personalidad que nunca. <br>
-            Esta renovación no es solo una mejora gráfica: es una declaración de intenciones. Los luchadores están listos para el combate… y lucen mejor que nunca.
-            </p>
-        </div>
+        
     </section>
 
     <section class="combate">

@@ -129,42 +129,31 @@
             return $filas_afectadas > 0;
         }
 
-        public function modificar_usuario($id_usuario, $nombre, $password) {
-            $count = 0;
-            $sql = "SELECT count(*) FROM usuario WHERE nombre = ?";
-            $sentencia = $this->bd->prepare($sql);
-            if (!$sentencia) {
-                return ["success" => false, "error" => "Error de base de datos al preparar verificación."];
+        public function modificar_usuario($id_usuario, $variable, $tipo) {
+            switch ($tipo) {
+                case "nombre":
+                    $sql = "UPDATE usuario SET nombre = ? WHERE id_usuario = ?";
+                    break;
+                case "password":
+                    if (!preg_match("'^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{8,}$'", $variable)) {
+                        return [
+                            "success" => false,
+                            "error" => "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo."
+                        ];
+                    }
+
+                    $sql = "UPDATE usuario SET contrasenia = ? WHERE id_usuario = ?";
+                    $variable = password_hash($variable, PASSWORD_DEFAULT);
+                    break;
+            
             }
-
-            $sentencia->bind_param("s", $nombre);
-            $sentencia->execute();
-            $sentencia->bind_result($count);
-            $sentencia->fetch();
-            $sentencia->close();
-
-            if ($count > 0) {
-                return [
-                    "success" => false,
-                    "error" => "El nombre de usuario ya está en uso."
-                ];
-            }
-
-            if (!preg_match("'^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{8,}$'", $password)) {
-                return [
-                    "success" => false,
-                    "error" => "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo."
-                ];
-            }
-
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "UPDATE usuario SET nombre = ?, contrasenia = ? WHERE id_usuario = ?";
+            
             $sentencia = $this->bd->prepare($sql);
             if (!$sentencia) {
                 return ["success" => false, "error" => "Error al preparar inserción."];
             }
 
-            $sentencia->bind_param("ssi", $nombre, $passwordHash, $id_usuario);
+            $sentencia->bind_param("si", $variable, $id_usuario);
             $sentencia->execute();
             $sentencia->close();
 

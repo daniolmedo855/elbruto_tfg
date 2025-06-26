@@ -3,7 +3,7 @@
     header("Content-Type: application/json");
     if (isset($_REQUEST["action"])) {
         $accion = strtolower(trim($_REQUEST["action"]));
-        $acciones_permitidas = ["login", "register", "crear_usuario", "modificar_usuario", "crear_bruto"];
+        $acciones_permitidas = ["login", "register", "crear_usuario", "modificar_usuario", "modificar_bruto","crear_bruto", "crear_bruto_habilidad", "crear_bruto_animal", "crear_bruto_herramienta", "modificar_bruto_habilidad"];
         if (in_array($accion, $acciones_permitidas)) {
             $accion();
         }
@@ -76,10 +76,20 @@
 
     function modificar_usuario(){
         $id = $_POST["id_usuario"];
-        $nombre = $_POST["username"];
-        $password = $_POST["password"];
         $bd = new Usuario();
-        $resultado = $bd->modificar_usuario($id, $nombre, $password);
+        if(isset($_POST["username"])){
+            $nombre = $_POST["username"];
+            if(!empty($nombre)){
+                $resultado = $bd->modificar_usuario($id, $nombre, "nombre");
+            }
+        }
+        if(isset($_POST["password"])){
+            $password = $_POST["password"];
+            if(!empty($password)){
+                $resultado = $bd->modificar_usuario($id, $password, "password");
+            }
+        }
+
         if ($resultado["success"]) {
             echo json_encode(["status" => "success"]);
         } else {
@@ -172,17 +182,65 @@
         echo json_encode(["success" => true, "id_bruto" => $id_bruto]);
     }
 
-    function modificar_bruto(){
-        $id = $_POST["id_bruto"];
-        $nombre = $_POST["username"];
-        $vida = $_POST["vida"];
-        $fuerza = $_POST["fuerza"];
-        $velocidad = $_POST["velocidad"];
-        $nivel = $_POST["nivel"];
-        $experiencia = $_POST["experiencia"];
-        $puntos_arena = $_POST["puntos_arena"];     
+    function crear_bruto_habilidad() {
+        require_once "../models/bruto.php";
         $bd = new Bruto();
-        $resultado = $bd->modificar_bruto($id, $nombre, $password);
+        $id_bruto = $_POST["id_bruto"];
+        $id_habilidad = $_POST["id_habilidad"];
+        $resultado = $bd->asignar_habilidad($id_bruto, $id_habilidad);
+        echo json_encode($resultado);
+    }
+
+    function crear_bruto_herramienta() {
+        require_once "../models/bruto.php";
+        $bd = new Bruto();
+        $id_bruto = $_POST["id_bruto"];
+        $id_herramienta = $_POST["id_herramienta"];
+        $resultado = $bd->asignar_herramienta($id_bruto, $id_herramienta);
+        echo json_encode($resultado);
+    }
+
+    function crear_bruto_animal() {
+        require_once "../models/bruto.php";
+        $bd = new Bruto();
+        $id_bruto = $_POST["id_bruto"];
+        $id_animal = $_POST["id_animal"];
+        $resultado = $bd->asignar_animal($id_bruto, $id_animal);
+        echo json_encode($resultado);
+    }
+
+    function modificar_bruto(){
+        require_once "../models/bruto.php";
+        $bd = new Bruto();
+        $id = $_POST["id_bruto"];
+        if(isset($_POST["nombre"])){
+            $nombre = $_POST["nombre"];
+            $resultado = $bd->modificar_bruto($id, $nombre, "nombre");
+        }
+        if(isset($_POST["vida"])){
+            $vida = $_POST["vida"];
+            $resultado = $bd->modificar_bruto($id, $vida, "vida");
+        }
+        if(isset($_POST["fuerza"])){
+            $fuerza = $_POST["fuerza"];
+            $resultado = $bd->modificar_bruto($id, $fuerza, "fuerza");
+        }
+        if(isset($_POST["velocidad"])){
+            $velocidad = $_POST["velocidad"];
+            $resultado = $bd->modificar_bruto($id, $velocidad, "velocidad");
+        }
+        if(isset($_POST["nivel"])){
+            $nivel = $_POST["nivel"];
+            $resultado = $bd->modificar_bruto($id, $nivel, "nivel");
+        }
+        if(isset($_POST["experiencia"])){
+            $experiencia = $_POST["experiencia"];
+            $resultado = $bd->modificar_bruto($id, $experiencia, "experiencia");
+        }
+        if(isset($_POST["puntos_arena"])){
+            $puntos_arena = $_POST["puntos_arena"];
+            $resultado = $bd->modificar_bruto($id, $puntos_arena, "puntos_arena");
+        }
         if ($resultado["success"]) {
             echo json_encode(["status" => "success"]);
         } else {
@@ -191,6 +249,14 @@
                 "message" => $resultado["error"] ?? "No se pudo modificar"
             ]);
         }
+    }
+
+    function modificar_bruto_habilidad(){
+        $bd = new Bruto();
+        $id_bruto = $_POST["id_bruto"];
+        $id_habilidad = $_POST["id_habilidad"];
+        $resultado = $bd->modificar_bruto_habilidad($id_bruto, $id_habilidad);
+        echo json_encode($resultado);
     }
 
     function sesion(){

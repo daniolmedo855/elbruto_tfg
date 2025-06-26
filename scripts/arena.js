@@ -48,12 +48,14 @@ function mostrar_participantes() {
     if(bruto_retado.animales.length > 0) {
         div_bruto_retado.innerHTML += `<img src="img/animales/animal_${bruto_retado.animales[0].id_animal}.png" alt="${bruto_retado.animales[0].nombre}}" class="${bruto_retado.animales[0].nombre}">`;
     }
+    div_bruto_retado.innerHTML += `<h2>${bruto_retado.nombre}</h2>`;
     
     div_bruto_retador.innerHTML = `<img src="img/aspectos/aspecto_${bruto_retador.id_aspecto}.png" alt="" class="bruto">`;
     div_bruto_retador.setAttribute("id", `bruto_${bruto_retador.id_bruto}`);
     if(bruto_retador.animales.length > 0) {
         div_bruto_retador.innerHTML += `<img src="img/animales/${bruto_retador.animales[0].imagen}" alt="${bruto_retador.animales[0].nombre}" class="${bruto_retador.animales[0].nombre}">`;
     }
+    div_bruto_retador.innerHTML += `<h2>${bruto_retador.nombre}</h2>`;
 }
 
 function limpiar(div) {
@@ -61,6 +63,7 @@ function limpiar(div) {
 }
 
 function ronda(bruto1, bruto2) {
+    console.log(bruto1, bruto2);
     let delay = 0;
 
     function delayStep(fn, ms) {
@@ -68,38 +71,60 @@ function ronda(bruto1, bruto2) {
         delay += ms;
     }
 
-    const paso = 1500;
+    const paso = 2000;
 
     // ARMADO
     if (bruto1.herramientas.length > 0 && bruto1.armado === null) {
         bruto1.armado = bruto1.herramientas.shift();
+        div_bruto_retador.innerHTML += `<img src="img/herramientas/${bruto1.armado.imagen}" alt="${bruto1.armado.nombre}" class="armado ${bruto1.armado.nombre}">`;
     }
     if (bruto2.herramientas.length > 0 && bruto2.armado === null) {
         bruto2.armado = bruto2.herramientas.shift();
+        div_bruto_retado.innerHTML += `<img src="img/herramientas/${bruto2.armado.imagen}" alt="${bruto2.armado.nombre}" class="armado ${bruto2.armado.nombre}">`;
     }
 
     // COMBATE por turnos
     delayStep(() => ataque(bruto1, bruto2), paso);
 
-    if (bruto2.vida <= 0) {
+    
+    if(bruto2.armado != null) {
+        if (desarmar(bruto1)) {
+        const arma = document.querySelector(`#bruto_${bruto2.id_bruto} img.armado`);
+        if(arma != null){
+            arma.remove();
+        }
+        delayStep(() => {
+            bruto2.armado = null;
+            console.log("AQUI "+bruto2.armado);
+            limpiar(cronologia);
+            cronologia.innerHTML += `<p>${bruto1.nombre} desarma a ${bruto2.nombre}<p>`;
+        }, paso);
+    }
+    }
+    
+
+    if (bruto2.vida < 1) {
         delayStep(() => {
             limpiar(cronologia);
             cronologia.innerHTML += `<p>${bruto1.nombre} gana la ronda<p>`;
+            console.log(bruto1, bruto2);
             terminar_ronda(bruto1.id_bruto, bruto2.id_bruto);
         }, paso);
         return; 
     }
 
-    if (desarmar(bruto1)) {
-        delayStep(() => {
-            bruto2.armado = null;
-            limpiar(cronologia);
-            cronologia.innerHTML += `<p>${bruto1.nombre} desarma a ${bruto2.nombre}<p>`;
-        }, paso);
-    }
-
     if (multigolpe(bruto1)) {
         delayStep(() => ataque(bruto1, bruto2), paso);
+    }
+
+    if (bruto2.vida < 1) {
+        delayStep(() => {
+            limpiar(cronologia);
+            cronologia.innerHTML += `<p>${bruto1.nombre} gana la ronda<p>`;
+            console.log(bruto1, bruto2);
+            terminar_ronda(bruto1.id_bruto, bruto2.id_bruto);
+        }, paso);
+        return; 
     }
 
     if (contraataque(bruto2)) {
@@ -108,25 +133,43 @@ function ronda(bruto1, bruto2) {
 
     delayStep(() => ataque(bruto2, bruto1), paso);
 
-    if (bruto1.vida <= 0) {
+    if(bruto1.armado != null){
+        if (desarmar(bruto2)) {
+        const arma = document.querySelector(`#bruto_${bruto1.id_bruto} img.armado`);
+        if(arma != null){
+            arma.remove();
+        }
+        delayStep(() => {
+            bruto1.armado = null;
+            console.log("AQUI "+bruto1.armado);
+            limpiar(cronologia);
+            cronologia.innerHTML += `<p>${bruto2.nombre} desarma a ${bruto1.nombre}<p>`;
+        }, paso);
+    }
+    }
+    
+    if (bruto1.vida < 1) {
         delayStep(() => {
             limpiar(cronologia);
             cronologia.innerHTML += `<p>${bruto2.nombre} gana la ronda<p>`;
+            console.log(bruto1, bruto2);
             terminar_ronda(bruto2.id_bruto, bruto1.id_bruto);
         }, paso);
         return;
     }
 
-    if (desarmar(bruto2)) {
-        delayStep(() => {
-            bruto1.armado = null;
-            limpiar(cronologia);
-            cronologia.innerHTML += `<p>${bruto2.nombre} desarma a ${bruto1.nombre}<p>`;
-        }, paso);
-    }
-
     if (multigolpe(bruto2)) {
         delayStep(() => ataque(bruto2, bruto1), paso);
+    }
+
+    if (bruto1.vida < 1) {
+        delayStep(() => {
+            limpiar(cronologia);
+            cronologia.innerHTML += `<p>${bruto2.nombre} gana la ronda<p>`;
+            console.log(bruto1, bruto2);
+            terminar_ronda(bruto2.id_bruto, bruto1.id_bruto);
+        }, paso);
+        return;
     }
 
     if (contraataque(bruto1)) {
@@ -135,6 +178,16 @@ function ronda(bruto1, bruto2) {
 
     if (bruto1.animales.length > 0) {
         delayStep(() => ataque_animal(bruto1, bruto1.animales[0], bruto2), paso);
+    }
+
+    if (bruto2.vida < 1) {
+        delayStep(() => {
+            limpiar(cronologia);
+            cronologia.innerHTML += `<p>${bruto1.nombre} gana la ronda<p>`;
+            console.log(bruto1, bruto2);
+            terminar_ronda(bruto1.id_bruto, bruto2.id_bruto);
+        }, paso);
+        return; 
     }
 
     if (bruto2.animales.length > 0) {
@@ -148,10 +201,12 @@ function ronda(bruto1, bruto2) {
             limpiar(cronologia);
             if(bruto1.vida > 0) {
                 cronologia.innerHTML += `<p>${bruto1.vida > 0 ? bruto1.nombre : bruto2.nombre} gana la ronda<p>`;
+                console.log(bruto1, bruto2);
                 terminar_ronda(bruto1.id_bruto, bruto2.id_bruto);
 
             } else {
                 cronologia.innerHTML += `<p>${bruto2.vida > 0 ? bruto2.nombre : bruto1.nombre} gana la ronda<p>`;
+                console.log(bruto1, bruto2);
                 terminar_ronda(bruto2.id_bruto, bruto1.id_bruto);
             }
         }
@@ -160,7 +215,7 @@ function ronda(bruto1, bruto2) {
 
 function ataque(bruto1, bruto2) {
     if(!esquivar(bruto2)) {
-        bruto2.vida -= (bruto1.fuerza + (bruto1.armado?.danio || 0));
+        bruto2.vida -= Math.round(bruto1.fuerza + (bruto1.armado?.danio || 0));
         animacion_ataque(bruto2.id_bruto);
         limpiar(cronologia);
         cronologia.innerHTML += `<p>${bruto1.nombre} golpea a ${bruto2.nombre} y le inflinge ${bruto1.fuerza + (bruto1.armado?.danio || 0)} de daño<p>`;
@@ -174,13 +229,13 @@ function ataque(bruto1, bruto2) {
 
 function ataque_animal(bruto1, animal, bruto2){
     if(!esquivar(bruto2)) {
-        bruto2.vida -= animal.danio*bruto1.fuerza;
+        bruto2.vida -= Math.round(animal.danio * bruto1.fuerza)
         animacion_ataque_animal(bruto2.id_bruto);
         limpiar(cronologia);
-        cronologia.innerHTML += `<p>${animal.nombre} de ${bruto1.nombre} golpea a ${bruto2.nombre} y le inflinge ${animal.danio*bruto1.fuerza} de daño<p>`;
+        cronologia.innerHTML += `<p>${animal.nombre} de ${bruto1.nombre} golpea a ${bruto2.nombre} y le inflinge ${Math.round(animal.danio * bruto1.fuerza)} de daño<p>`;
     } else{
         limpiar(cronologia);
-        cronologia.innerHTML += `<p>${animal.nombre} esquiva el ataque de ${bruto.nombre}<p>`;
+        cronologia.innerHTML += `<p> ${bruto2.nombre} esquiva el ataque de ${animal.nombre} de ${bruto1.nombre}<p>`;
     }
     actualizar_vida();
 }
@@ -316,7 +371,6 @@ function terminar_ronda(id_ganador, id_perdedor) {
             window.location.href = "index.php?action=inventario&id_bruto="+bruto_retador.id_bruto;
         })
     })
-    
 }
 
 function actualizar_resultado(id_ganador, id_perdedor) {

@@ -9,6 +9,13 @@ body{
     padding: 2%;
 }
 
+@media screen and (max-width: 1000px) {
+    body{
+        padding: 1%;
+    }
+    
+}
+
 :root {
   --color-primario: #fff6b0;
   --color-secundario: #8c5938;
@@ -42,6 +49,38 @@ h2{
 
 h3{
     font-size: 2.5rem;
+}
+
+@media screen and (max-width: 1920px) {
+    h1{
+        font-size: 5.5rem;
+    }
+
+    h3{
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    h1{
+        font-size: 5rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    h2{
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    h2{
+        font-size: 2.5rem;
+    }
+
+    h3{
+        font-size: 2rem;
+    }
 }
 
 a, p, h4, input, .btn, .cronologia{
@@ -101,7 +140,14 @@ nav.navbar>a>img{
     filter: drop-shadow(6px 6px 0 #3a2e2a);
 }
 
-/*Login Sigin*/
+@media screen and (max-width: 1000px) {
+    nav.navbar>a>img{
+        width: 200px;
+    }
+    
+}
+
+/*BOTON Login Sigin*/
 nav.navbar>div.menu{
     width: 20%;
     display: flex;
@@ -109,6 +155,35 @@ nav.navbar>div.menu{
     align-items: center;
 }
 
+nav.navbar>div.menu>a.btn{
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 1400px) {
+    nav.navbar>div.menu{
+        width: 25%;
+    }
+
+    nav.navbar>div.menu>a.btn{
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    nav.navbar>div.menu>a.btn{
+        padding: 5px 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    nav.navbar>div.menu{
+        width: 30%;
+    }
+
+    nav.navbar>div.menu>a.btn{
+        font-size: 1rem;
+    }
+}
 
 /*NAVBAR_HOME*/
 nav.navbar_home{
@@ -139,6 +214,28 @@ main{
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
 }
 
+main:has(.admin){
+    width: 80%;
+}
+
+main:has(.ranking){
+    width: 80%;
+}
+
+@media screen and (max-width: 1400px) {
+    main{
+        margin: 2%;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+    main{
+        margin: 2% 0;
+    }
+
+}
+
 /*Banner*/
 section.banner{
     background: url('../img/assets/arena.png') no-repeat center center;
@@ -147,6 +244,7 @@ section.banner{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 section.banner>div{
@@ -162,6 +260,16 @@ section.banner>div{
     gap: 20px;
 }
 
+@media screen and (max-width: 1400px) {
+    section.banner{
+        height: 60vh;
+    }
+
+    section.banner>div{
+        width: 100%;
+    }
+}
+
 section.banner>div>h1, section.banner>div>p{
     color: var(--color-texto-secundario);
 }
@@ -174,29 +282,53 @@ section.banner>div>h1, section.banner>div>a.btn{
 section.apariencia{
     width: 80%;
     margin: 6% auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 60vh;
     gap: 5%;
 }
 
+section.apariencia>div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+section.apariencia>h2{
+    text-align: center;
+    margin-bottom: 4%;
+}
+
+@media screen and (max-width: 1400px) {
+    section.apariencia{
+        height: auto;
+        width: 90%;
+    }
+
+    section.apariencia>h2{
+        margin-bottom: 0;
+    }
+
+    section.apariencia>div{
+        flex-direction: column;
+        gap: 2%;
+    }
+}
+
 /*Carrusel*/
-section.apariencia>div.carrusel{
+section.apariencia>div>div.carrusel{
     position: relative;
     width: 80%;
     margin: auto;
     overflow: hidden;
 }
 
-section.apariencia>div.carrusel>div.imagenes{
+section.apariencia>div>div.carrusel>div.imagenes{
     display: flex;
     transition: transform 0.5s ease-in-out;
 }
 
-
 /*Flechas*/
-section.apariencia>div.carrusel>button.siguiente, section.apariencia>div.carrusel>button.anterior{
+section.apariencia>div>div.carrusel>button.siguiente, section.apariencia>div>div.carrusel>button.anterior{
     width: 40px;
     height: 40px;
     position: absolute;
@@ -212,36 +344,73 @@ section.apariencia>div.carrusel>button.siguiente, section.apariencia>div.carruse
     transition: all 0.3s ease-in-out;
 }
 
-section.apariencia>div.carrusel>button.siguiente{
+section.apariencia>div>div.carrusel>button.siguiente{
     right: 20px;
 }
 
-section.apariencia>div.carrusel>button.anterior{
+section.apariencia>div>div.carrusel>button.anterior{
     left: 0px;
 }
 
-section.apariencia>div.carrusel>button.anterior:hover, section.apariencia>div.carrusel>button.siguiente:hover{
+section.apariencia>div>div.carrusel>button.anterior:hover, section.apariencia>div>div.carrusel>button.siguiente:hover{
     transform: scale(1.2) translateY(-50%);
 }
 
 /*Imagenes*/
-section.apariencia>div.carrusel>div.imagenes>img{
+section.apariencia>div>div.carrusel>div.imagenes>img{
     width: 100%;
     height: 100%
 }
 
+@media screen and (max-width: 1000px) {
+    section.apariencia>div>div.carrusel{
+        width: 80%;
+    }
+    
+}
+
 /*Texto*/
-section.apariencia>div.carrusel>div.texto{
-    text-align: center;
-    width: 40%;
-    margin: auto;
+section.apariencia>div>div.texto{
+    width: 100%;
     color: var(--color-texto-secundario);
+}
+
+section.apariencia>div>div.texto>p{
+    text-align: justify;
+    margin-top: 5%;
+}
+
+@media screen and (max-width: 1400px) {
+    section.apariencia>div>div.carrusel{
+        order: 2;
+    }
+    section.apariencia>div>div.texto{
+        order: 1;
+        width: 100%;
+        margin-bottom: 5%;
+    }
+
+    section.apariencia>div>div.texto>p{
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    section.apariencia>div>div.texto>p{
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    section.apariencia>div>div.texto>p{
+        text-align: justify;
+    }
 }
 
 /*COMBATE*/
 section.combate{
     width: 80%;
-    margin: 6% auto;
+    margin: 8% auto;
 }
 
 section.combate>h2{
@@ -252,12 +421,10 @@ section.combate>h2{
 section.combate>div{
     display: flex;
     justify-content: center;
-    gap: 2%;
 }
 
 section.combate>div>div{
     width: 100%;
-
 }
 
 section.combate>div>div>h3{
@@ -300,6 +467,36 @@ div.modal>p{
     color: #4caf50;
 }
 
+@media screen and (max-width: 1400px) {
+    section.combate{
+        width: 90%;
+    }
+    section.combate>div{
+        flex-direction: column;
+    }
+
+    section.combate>div>div{
+        width: 50%;
+        margin: 2% auto;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    section.combate>div>div{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    section.combate{
+        margin-top: 20%;
+    }
+    section.combate>div>div{
+        width: 100%;
+        margin: 2% 0;
+    }
+}
+
 /*MASCOTAS*/
 section.mascotas{
     width: 80%;
@@ -320,6 +517,37 @@ section.mascotas>div{
 
 section.mascotas>div>div{
     width: 100%;
+}
+
+@media screen and (max-width: 1400px) {
+    section.mascotas{
+        width: 90%;
+    }
+
+    section.mascotas>div{
+        flex-direction: column;
+    }
+    section.mascotas>div>p{
+        text-align: center;
+    }
+
+    section.mascotas>div>div{
+        width: 100%;
+        margin: 2% 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    section.mascotas{
+        margin-top: 20%;
+    }
+    section.mascotas>div>div{
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 /*FORM*/
@@ -368,6 +596,18 @@ form.form>div{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+    form.form{
+        width: 80%;
+    } 
+}
+
+@media screen and (max-width: 500px) {
+    form.form{
+        width: 90%;
+    } 
 }
 
 /*CREAR_BRUTO*/
@@ -443,6 +683,7 @@ div.apariencia>div.carrusel>div.imagenes>img{
 /*HOME*/
 section.brutos{
     padding: 2%;
+    margin: auto;
 }
 
 section.brutos>div{
@@ -503,6 +744,19 @@ section.brutos>div>div>button{
     border: none;
     cursor: pointer;
     color: var(--color-texto-secundario);
+}
+
+@media screen and (max-width: 1000px) {
+    section.brutos>div{
+        flex-direction: column;
+    }
+    section.brutos>div>div{
+        margin: 1% 0;
+    }
+
+    section.brutos>div>div>p{
+        font-size: 1.5rem;
+    }
 }
 
 /*INVENTARIO*/
@@ -643,6 +897,36 @@ div.combate>button{
     margin-bottom: 2%;
 }
 
+@media screen and (max-width: 1400px) {
+    div.inventario{
+        flex-direction: column;
+        padding-bottom: 10%;
+    }
+    div.inventario>div.herramientas_habilidades{
+        width: 90%;
+        order: 3;
+    }
+    div.inventario>div.combate{
+        width: 90%;
+        order: 2;
+        margin: 10% 0;
+    }
+    div.inventario>div.personajes{
+        width: 90%;
+        order: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    div.inventario{
+        padding-bottom: 20%;
+    }
+
+}
+
 /*BUSCADOR*/
 section.brutos>div{
     display: flex;
@@ -655,20 +939,37 @@ section.brutos>div{
 body:has(.fondo){
     padding: 0;
     margin: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center
 }
+
 main:has(.fondo){
     padding: 0;
     margin: 0;
     border: 0;
 }   
+
+body:has(.navbar_home){
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 section.fondo{
+    position: relative;
     background: url("../img/assets/arena.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center center;
-    width: 100%; /* o cualquier otro valor deseado */
-    height: 100vh;
-    margin: 0 auto;
+    width: 1920px;
+    height: 1080px;
+    margin: auto;
     overflow: hidden;
     padding: 6% 10%;
     display: flex;
@@ -677,7 +978,19 @@ section.fondo{
     align-items: center;
 }
 
+@media screen and (max-width: 1920px) {
+    section.fondo{
+        width: 100%;
+        height: calc(100vw * 9 / 16);
+    }
+    
+}
+
 section.fondo>div.marcadores{
+    position: absolute;
+    top: 0;
+    padding: 1%;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -685,8 +998,8 @@ section.fondo>div.marcadores{
 }
 
 section.fondo>div.marcadores>div.vida1, section.fondo>div.marcadores>div.vida2{
-  width: 20%;
-  height: 24px;
+  width: 40%;
+  height: 50px;
   background-color: #333;
   border: 2px solid #666;
   border-radius: 6px;
@@ -723,26 +1036,186 @@ section.fondo>div.peleadores>div.bruto2{
     align-items: end;
 }
 
+section.fondo>div.peleadores>div>img.bruto{
+    width: 100%;
+    z-index: 997;
+}
+
+section.fondo>div.peleadores>div>img.Lobo{
+    width: 50%;
+    z-index: 998;
+}
+
+section.fondo>div.peleadores>div>img.Perro{
+    width: 40%;
+    z-index: 998;
+}
+
+section.fondo>div.peleadores>div>img.Oso{
+    width: 100%;
+    z-index: 996;
+}
+
+section.fondo>div.peleadores>div>img.armado{
+    z-index: 999;
+}
+
 section.fondo>div.peleadores>div.bruto1>img.bruto{
     width: 100%;
     transform: scaleX(-1);
+    position: relative;
 }
 
 section.fondo>div.peleadores>div.bruto1>img.Lobo{
     transform: scaleX(-1);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+section.fondo>div.peleadores>div.bruto1>img.Oso{
+    position: absolute;
+    bottom: 0;
+    left: -50%;
+}
+
+section.fondo>div.peleadores>div.bruto1>img.Perro{
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 section.fondo>div.peleadores>div.bruto2>img.bruto{
     width: 100%;
+    position: relative;
+}
+
+section.fondo>div.peleadores>div.bruto2>img.Lobo{
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 section.fondo>div.peleadores>div.bruto2>img.Oso{
     transform: scaleX(-1);
-    width: 200px;
+    position: absolute;
+    bottom: 0;
+    right: -50%;
 }
 
 section.fondo>div.peleadores>div.bruto2>img.Perro{
     transform: scaleX(-1);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+section.fondo>div.peleadores>div>img.armado{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+section.fondo>div.peleadores>div.bruto2>img.armado{
+    left: 0;
+}
+
+section.fondo>div.peleadores>div>img.Cuchillo{
+    width: 40%;
+}
+
+section.fondo>div.peleadores>div>img.Espadon{
+    width: 50%;
+}
+
+section.fondo>div.peleadores>div>img.Cimitarra{
+    width: 55%;
+}
+
+section.fondo>div.peleadores>div>img.Sai{
+    width: 40%;
+
+}
+
+section.fondo>div.peleadores>div>img.Hueso{
+    width: 40%;
+    
+}
+
+section.fondo>div.peleadores>div>img.Maza{
+    width: 40%;
+}
+
+section.fondo>div.peleadores>div>img.Hacha{
+    width: 60%;
+}
+
+section.fondo>div.peleadores>div.bruto1>img.Cuchillo{
+    transform: translateY(-60%) rotate(-20deg);
+}
+
+section.fondo>div.peleadores>div.bruto1>img.Cimitarra{
+    right: -5%;
+}
+
+section.fondo>div.peleadores>div.bruto1>img.Sai{
+    transform: translateY(-80%) rotate(-45deg);
+}
+
+section.fondo>div.peleadores>div.bruto1>img.Hueso{
+    transform: translateY(-60%) rotate(190deg);
+}
+
+section.fondo>div.peleadores>div.bruto1>img.Maza{
+    transform: translateY(-70%) rotate(20deg);
+}
+
+section.fondo>div.peleadores>div.bruto1>img.Hacha{
+    transform: translate(20% , -60%) rotate(-45deg);
+}
+
+section.fondo>div.peleadores>div.bruto2>img.Cuchillo{
+    transform: translateY(-60%) scaleX(-1) rotate(-20deg);
+}
+
+section.fondo>div.peleadores>div.bruto2>img.Espadon{
+    transform: scaleX(-1) translateY(-50%);
+}
+
+section.fondo>div.peleadores>div.bruto2>img.Cimitarra{
+    left: -5%;
+    transform: translateY(-60%) scaleX(-1);
+}
+
+section.fondo>div.peleadores>div.bruto2>img.Sai{
+    transform: translateY(-80%) scaleX(-1) rotate(-45deg);
+}
+
+section.fondo>div.peleadores>div.bruto2>img.Hueso{
+    transform: translateY(-60%) scaleX(-1) rotate(190deg);
+}
+
+section.fondo>div.peleadores>div.bruto2>img.Maza{
+    transform: translateY(-70%) scaleX(-1) rotate(20deg);
+}
+
+section.fondo>div.peleadores>div.bruto2>img.Hacha{
+    transform: translate(-20% , -60%) scaleX(-1) rotate(-45deg);
+}
+
+
+
+section.fondo>div.peleadores>div>h2{
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-texto-secundario);
+    background-color: rgb(0, 0, 0, 0.39);
+    padding: 5%;
+    border-radius: 6px;
+    font-size: 50px;
 }
 
 section.fondo>div.peleadores>div{
@@ -780,29 +1253,64 @@ section.fondo>div.cronologia>p{
 }
 
 /*RANKING*/
+section.ranking{
+    width: 100%;
+}
+
 section.ranking>h2{
     text-align: center;
     margin-bottom: 2%;
 }
 
 section.ranking>div{
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
 }
 
 section.ranking>div>div{
-    width: 100%;
+    width: 45%;
     display: flex;
     justify-content: start;
     align-items: center;
     margin: 1% 0;
+    border: solid 5px var(--color-secundario);
+    border-radius: 6px;
+    padding: 2%;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 section.ranking>div>div>img{
     width: 100px;
 }
 
+@media screen and (max-width: 1400px) {
+
+    section.ranking{
+        padding-bottom: 10%;
+    }
+
+    section.ranking>div>div{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+
+    section.ranking{
+        padding-bottom: 10%;
+    }
+
+    section.ranking>div>div{
+        width: 100%;
+    }
+}
+
 /*ADMIN*/
 section.admin{
+    width: 100%;
+    min-height: 50vh;
     text-align: center;
     padding: 2%;
 }
@@ -826,6 +1334,9 @@ section.admin>div.buscador>form.form_admin>select{
     background-color: var(--color-primario);
     color: var(--color-secundario);
     font-size: 1.2em;
+    cursor: pointer;
+    transform: translateX(-50%);
+    text-align: center;
 }
 
 section.admin>div.buscador>form.form_admin>select:focus{
@@ -833,20 +1344,20 @@ section.admin>div.buscador>form.form_admin>select:focus{
 }
 
 section.admin>div.tabla{
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
     margin-top: 2%;
+    overflow-x: auto;
 }
 
 section.admin>div.tabla>table{
     width: 100%;
+    margin: 0 auto;
     border-collapse: collapse;
     text-align: center;
 }
 
 section.admin>div.tabla>table>tr{
     height: 50px;
-    cursor: pointer;
 }
 
 section.admin>div.tabla>table>tr:not(:first-child):hover{
@@ -861,10 +1372,13 @@ section.admin>div.tabla>table>tr:not(:first-child):hover>button{
 
 section.admin>div.tabla>table>tr>td{
     padding: 0 4%;
+    min-width: 50px;
+    text-align: center;
 }
 
 section.admin>div.tabla>table>tr>button{
     width: 50%;
+    min-width: 100px;
     height: 50px;
     padding: 2%;
     background-color: transparent;
@@ -899,6 +1413,16 @@ section.admin>form.form_admin{
     border-radius: 6px;
 }
 
+section.admin>form.form_admin>button.cerrar{
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
 section.admin>form.form_admin>input:not(input[type="submit"]){
     width: 100%;
     background-color: var(--color-primario);
@@ -929,4 +1453,14 @@ section.admin>form.form_admin>input:not(input[type="submit"]):focus{
 
 section.admin>form.form_admin>input[type="submit"]{ 
     border: none;
+}
+
+@media screen and (max-width: 700px) {
+    section.admin>div.buscador{
+        width: 100%;
+        justify-content: space-between;
+    }
+    section.admin>div.buscador>form.form_admin>select{
+        transform: translateX(0);
+    }
 }

@@ -14,6 +14,9 @@
                 <select>
                     <option value="usuarios">Usuarios</option>
                     <option value="brutos">Brutos</option>
+                    <option value="herramientas">Herramientas</option>
+                    <option value="habilidades">Habilidades</option>
+                    <option value="animales">Animales</option>
                 </select>
             </form>
             <button class="btn" type="button">AÑADIR</button>

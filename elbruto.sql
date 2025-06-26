@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2025 a las 05:20:06
+-- Tiempo de generación: 27-06-2025 a las 01:03:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -90,9 +90,29 @@ CREATE TABLE `bruto` (
 --
 
 INSERT INTO `bruto` (`id_bruto`, `nombre`, `nivel`, `vida`, `fuerza`, `velocidad`, `puntos_arena`, `experiencia`, `id_usuario`, `id_aspecto`) VALUES
-(101, 'dani', 1, 50, 5, 5, 0, 1, 22, 2),
-(106, 'dani5', 1, 60, 5, 5, 0, 0, 22, 2),
-(111, 'Refrescos', 1, 60, 8, 7, 0, 0, 23, 2);
+(106, 'dani', 5, 60, 10, 6, 22, 9, 22, 2),
+(123, 'koala', 1, 60, 5, 7, 1, 2, 28, 1),
+(200, 'bruto1_1', 1, 50, 1, 1, 0, 0, 30, 1),
+(201, 'bruto1_2', 1, 50, 1, 1, 0, 0, 30, 2),
+(202, 'bruto2_1', 1, 50, 1, 1, 0, 0, 31, 1),
+(203, 'bruto2_2', 1, 50, 1, 1, 0, 0, 31, 2),
+(204, 'bruto3_1', 1, 50, 1, 1, 0, 0, 32, 1),
+(205, 'bruto3_2', 1, 50, 1, 1, 0, 0, 32, 2),
+(206, 'bruto4_1', 1, 50, 1, 1, 0, 0, 33, 1),
+(207, 'bruto4_2', 1, 50, 1, 1, 0, 0, 33, 2),
+(208, 'bruto5_1', 1, 50, 1, 1, 0, 0, 34, 1),
+(209, 'bruto5_2', 1, 50, 1, 1, 0, 0, 34, 2),
+(210, 'bruto6_1', 1, 50, 1, 1, 0, 0, 35, 1),
+(211, 'bruto6_2', 1, 50, 1, 1, 0, 0, 35, 2),
+(212, 'bruto7_1', 1, 50, 1, 1, 0, 0, 36, 1),
+(213, 'bruto7_2', 1, 50, 1, 1, 0, 0, 36, 2),
+(214, 'bruto8_1', 1, 50, 1, 1, 0, 0, 37, 1),
+(215, 'bruto8_2', 1, 50, 1, 1, 0, 0, 37, 2),
+(216, 'bruto9_1', 1, 50, 1, 1, 0, 0, 38, 1),
+(217, 'bruto9_2', 1, 50, 1, 1, 0, 0, 38, 2),
+(218, 'bruto10_1', 1, 50, 1, 1, 0, 0, 39, 1),
+(219, 'bruto10_2', 1, 50, 1, 1, 0, 0, 39, 2),
+(220, 'Izquierdo', 1, 60, 5, 7, 0, 1, 28, 4);
 
 -- --------------------------------------------------------
 
@@ -105,6 +125,14 @@ CREATE TABLE `bruto_animal` (
   `id_animal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `bruto_animal`
+--
+
+INSERT INTO `bruto_animal` (`id_bruto`, `id_animal`) VALUES
+(106, 2),
+(220, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -116,6 +144,34 @@ CREATE TABLE `bruto_habilidad` (
   `id_habilidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `bruto_habilidad`
+--
+
+INSERT INTO `bruto_habilidad` (`id_bruto`, `id_habilidad`) VALUES
+(123, 2),
+(200, 1),
+(201, 2),
+(202, 3),
+(203, 4),
+(204, 5),
+(205, 6),
+(206, 7),
+(207, 8),
+(208, 9),
+(209, 10),
+(210, 1),
+(211, 2),
+(212, 3),
+(213, 4),
+(214, 5),
+(215, 6),
+(216, 7),
+(217, 8),
+(218, 9),
+(219, 10),
+(220, 10);
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +182,34 @@ CREATE TABLE `bruto_herramienta` (
   `id_bruto` int(11) NOT NULL,
   `id_herramienta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `bruto_herramienta`
+--
+
+INSERT INTO `bruto_herramienta` (`id_bruto`, `id_herramienta`) VALUES
+(123, 7),
+(200, 1),
+(201, 2),
+(202, 3),
+(203, 4),
+(204, 5),
+(205, 6),
+(206, 7),
+(207, 1),
+(208, 2),
+(209, 3),
+(210, 4),
+(211, 5),
+(212, 6),
+(213, 7),
+(214, 1),
+(215, 2),
+(216, 3),
+(217, 4),
+(218, 5),
+(219, 6),
+(220, 5);
 
 -- --------------------------------------------------------
 
@@ -139,6 +223,14 @@ CREATE TABLE `combate` (
   `id_ganador` int(11) NOT NULL,
   `id_perdedor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `combate`
+--
+
+INSERT INTO `combate` (`id_combate`, `fecha`, `id_ganador`, `id_perdedor`) VALUES
+(210, '2025-06-27 00:00:00', 123, 106),
+(211, '2025-06-27 00:00:00', 106, 220);
 
 -- --------------------------------------------------------
 
@@ -305,7 +397,18 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `contrasenia`, `tipo`) VALUES
 (22, 'koala', '$2y$10$.LV8rf/gBNIRr6C7R0g8Lu8WavvzARSqmrvZSVmp7odiEGpwIk04a', 0),
-(23, 'admin', '$2y$10$wifpGhts9mIkb1m3QwHN8u.82KuyMtSvl0c6kqLcOkpB270N0LrTq', 1);
+(24, 'daniel', '$2y$10$isEs3BHQZ010AYK4oNmoC.cMsrPYDdW0qiWCJ8Hjuqc1N3o0XFmk.', 0),
+(28, 'admin', '$2y$10$L9KWzctnwLD.F9aAy84GQed6b2uccNy4AOZ5bxhOOowdNKuxRvJFO', 1),
+(30, 'user1', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
+(31, 'user2', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
+(32, 'user3', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
+(33, 'user4', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
+(34, 'user5', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
+(35, 'user6', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
+(36, 'user7', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
+(37, 'user8', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
+(38, 'user9', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0),
+(39, 'user10', '$2y$10$zqEw3RA8mJYm8kkKeCmLC.vcqnA3ONw5rJ.V5C7Km3jOLFYZrNSiq', 0);
 
 --
 -- Índices para tablas volcadas
@@ -424,13 +527,13 @@ ALTER TABLE `aspecto`
 -- AUTO_INCREMENT de la tabla `bruto`
 --
 ALTER TABLE `bruto`
-  MODIFY `id_bruto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id_bruto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
 
 --
 -- AUTO_INCREMENT de la tabla `combate`
 --
 ALTER TABLE `combate`
-  MODIFY `id_combate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `id_combate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
 
 --
 -- AUTO_INCREMENT de la tabla `efecto`
@@ -454,7 +557,7 @@ ALTER TABLE `herramienta`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Restricciones para tablas volcadas
